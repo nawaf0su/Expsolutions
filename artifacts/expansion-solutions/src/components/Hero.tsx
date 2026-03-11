@@ -5,7 +5,11 @@ type T = (typeof content)["ar"] | (typeof content)["en"];
 
 export function Hero({ t }: { t: T }) {
   const scrollToContact = () => {
-    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+    const target = document.querySelector("#contact") as HTMLElement | null;
+    if (target) {
+      const y = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
 
   return (

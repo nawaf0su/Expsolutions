@@ -11,13 +11,11 @@ interface NavbarProps {
 }
 
 const navItems = [
-  { key: "about", href: "#about" },
-  { key: "vision", href: "#vision" },
-  { key: "mission", href: "#mission" },
-  { key: "values", href: "#values" },
+  { key: "about",    href: "#about" },
+  { key: "vision",   href: "#vision" },
   { key: "services", href: "#services" },
-  { key: "clients", href: "#clients" },
-  { key: "contact", href: "#contact" },
+  { key: "clients",  href: "#clients" },
+  { key: "contact",  href: "#contact" },
 ] as const;
 
 export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
@@ -46,7 +44,12 @@ export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
   }, []);
 
   const scrollTo = (href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    const target = document.querySelector(href) as HTMLElement | null;
+    if (target) {
+      const navbarHeight = 80;
+      const y = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
     setMenuOpen(false);
   };
 
