@@ -1,0 +1,121 @@
+Please make the following UI/content edit carefully without changing the rest of the website unnecessarily.
+
+IMPORTANT:
+Do not redesign the whole site.
+Do not change the structure unless needed for this exact edit.
+Do not add fake data or percentages.
+Keep the site premium, corporate, and professional.
+
+==================================================
+EDIT REQUEST: VALUES / PRINCIPLES DESIGN
+==================================================
+
+In the section where values such as:
+- Innovation
+- Quality
+- Integrity
+
+are currently shown with percentage bars or progress-style indicators,
+
+REMOVE the percentages completely.
+
+Do not show any numeric percentages like:
+80%
+90%
+95%
+etc.
+
+Also avoid any UI that looks like fake KPI metrics.
+
+==================================================
+WHAT TO REPLACE THEM WITH
+==================================================
+
+Replace the percentage-style progress bars with a more premium visual style that communicates strength and professionalism without numbers.
+
+Use one of these approaches:
+
+Preferred approach:
+- a clean horizontal bar or indicator line
+- no percentage label
+- no numeric value
+- each value has:
+  - title
+  - short description
+  - elegant visual indicator/bar design
+- the bar should look like a brand/principle marker, not a measurable statistic
+
+Design idea:
+- a refined horizontal track
+- partially filled in a consistent aesthetic way
+- or a segmented line / glow line / accent bar
+- or a minimal brand-colored underline block
+- but without implying measurable percentages
+
+The goal is for these items to feel like:
+- core company principles
+- brand pillars
+- trust indicators
+not fake analytics.
+
+==================================================
+DESIGN REQUIREMENTS
+==================================================
+
+Make this section look very professional and high-end.
+
+Requirements:
+- no numbers
+- no percentages
+- no charts
+- no circular progress UI
+- no dashboard metric style
+- no animated counting effects
+
+Instead use:
+- strong typography
+- elegant spacing
+- subtle brand-color accents
+- premium card or row layout
+- minimal but polished visual emphasis
+
+Suggested styling:
+- each value can appear as a refined row or card
+- title on top
+- description underneath
+- decorative premium indicator bar beneath or beside it
+- use the existing brand palette
+- keep it clean and readable
+
+==================================================
+TONE / VISUAL GOAL
+==================================================
+
+This section should make the company look:
+- serious
+- trustworthy
+- premium
+- established
+- professional
+
+It should feel like a high-end corporate brand presentation, not a startup template with fake stats.
+
+==================================================
+KEEP THESE RULES
+==================================================
+
+- Keep Arabic as default
+- Keep English toggle working
+- Preserve bilingual content
+- Do not add made-up values beyond the existing company values
+- Only improve the visual representation of the values/principles section
+
+==================================================
+FINAL CHECK
+==================================================
+
+Before finishing, verify:
+- all percentages are removed
+- no fake measurable KPI-style visuals remain
+- the values section now looks like premium brand principles
+- the section fits the rest of the site visually

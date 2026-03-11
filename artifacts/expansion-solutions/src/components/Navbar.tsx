@@ -12,14 +12,19 @@ interface NavbarProps {
 }
 
 const navItems = [
-  { key: "about",    href: "#about" },
-  { key: "vision",   href: "#vision" },
+  { key: "about", href: "#about" },
+  { key: "vision", href: "#vision" },
   { key: "services", href: "#services" },
-  { key: "clients",  href: "#clients" },
-  { key: "contact",  href: "#contact" },
+  { key: "clients", href: "#clients" },
+  { key: "contact", href: "#contact" },
 ] as const;
 
-export function Navbar({ t, lang, onToggleLang, onMainPage = true }: NavbarProps) {
+export function Navbar({
+  t,
+  lang,
+  onToggleLang,
+  onMainPage = true,
+}: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -34,11 +39,15 @@ export function Navbar({ t, lang, onToggleLang, onMainPage = true }: NavbarProps
   useEffect(() => {
     if (!onMainPage) return;
     const observer = new IntersectionObserver(
-      entries => { entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id); }); },
-      { threshold: 0.3 }
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActiveSection(e.target.id);
+        });
+      },
+      { threshold: 0.3 },
     );
     const sections = document.querySelectorAll("section[id]");
-    sections.forEach(s => observer.observe(s));
+    sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, [onMainPage]);
 
@@ -73,24 +82,50 @@ export function Navbar({ t, lang, onToggleLang, onMainPage = true }: NavbarProps
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-[70px]">
-
           {/* Logo */}
-          <button onClick={() => navigate("/")} className="flex items-center shrink-0">
-            <img src="/logo.png" alt={t.companyName} className="w-auto object-contain"
-              style={{ height: "90px", maxWidth: "260px", mixBlendMode: "screen" }} />
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center shrink-0"
+          >
+            <img
+              src="/logo.png"
+              alt={t.companyName}
+              className="w-auto object-contain"
+              style={{
+                height: "140px",
+                maxWidth: "260px",
+                mixBlendMode: "screen",
+              }}
+            />
           </button>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-0.5">
-            {navItems.map(item => {
+            {navItems.map((item) => {
               const label = t.nav[item.key as keyof typeof t.nav];
-              const isActive = onMainPage && activeSection === item.href.slice(1);
+              const isActive =
+                onMainPage && activeSection === item.href.slice(1);
               return (
-                <button key={item.key} onClick={() => scrollTo(item.href)}
+                <button
+                  key={item.key}
+                  onClick={() => scrollTo(item.href)}
                   className="px-3 py-2 rounded-md text-sm font-medium transition-all duration-200"
-                  style={{ color: isActive ? "var(--accent)" : "rgba(255,255,255,0.8)", backgroundColor: isActive ? "rgba(0,168,200,0.12)" : "transparent" }}
-                  onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = "#fff"; }}
-                  onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.8)"; }}>
+                  style={{
+                    color: isActive ? "var(--accent)" : "rgba(255,255,255,0.8)",
+                    backgroundColor: isActive
+                      ? "rgba(0,168,200,0.12)"
+                      : "transparent",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive)
+                      (e.currentTarget as HTMLElement).style.color = "#fff";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive)
+                      (e.currentTarget as HTMLElement).style.color =
+                        "rgba(255,255,255,0.8)";
+                  }}
+                >
                   {label}
                 </button>
               );
@@ -100,32 +135,85 @@ export function Navbar({ t, lang, onToggleLang, onMainPage = true }: NavbarProps
           {/* Right controls */}
           <div className="flex items-center gap-2">
             {/* Language switcher */}
-            <button onClick={onToggleLang}
+            <button
+              onClick={onToggleLang}
               className="px-3 py-1.5 rounded-md text-sm font-semibold transition-all duration-200"
-              style={{ border: "1px solid rgba(0,168,200,0.4)", color: "var(--accent)", backgroundColor: "transparent" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(0,168,200,0.12)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "transparent"; }}>
+              style={{
+                border: "1px solid rgba(0,168,200,0.4)",
+                color: "var(--accent)",
+                backgroundColor: "transparent",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor =
+                  "rgba(0,168,200,0.12)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor =
+                  "transparent";
+              }}
+            >
               {lang === "ar" ? "EN" : "عربي"}
             </button>
 
             {/* Submit Your Idea CTA */}
-            <button onClick={() => { navigate("/submit-idea"); setMenuOpen(false); }}
+            <button
+              onClick={() => {
+                navigate("/submit-idea");
+                setMenuOpen(false);
+              }}
               className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 text-white text-sm font-semibold rounded-md transition-all duration-200 shadow-sm"
               style={{ backgroundColor: "var(--primary)" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}>
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor =
+                  "var(--primary-dark)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor =
+                  "var(--primary)";
+              }}
+            >
+              <svg
+                className="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
               </svg>
               {t.nav.ideaForm}
             </button>
 
             {/* Hamburger */}
-            <button className="lg:hidden p-2 text-gray-300 hover:text-white" onClick={() => setMenuOpen(!menuOpen)}>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {menuOpen
-                  ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
+            <button
+              className="lg:hidden p-2 text-gray-300 hover:text-white"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {menuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
               </svg>
             </button>
           </div>
@@ -134,21 +222,45 @@ export function Navbar({ t, lang, onToggleLang, onMainPage = true }: NavbarProps
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="lg:hidden border-t border-white/10 py-3 space-y-0.5">
-            {navItems.map(item => (
-              <button key={item.key} onClick={() => scrollTo(item.href)}
+            {navItems.map((item) => (
+              <button
+                key={item.key}
+                onClick={() => scrollTo(item.href)}
                 className="block w-full text-start px-4 py-2.5 text-sm font-medium rounded-md transition-colors"
                 style={{ color: "rgba(255,255,255,0.8)" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(255,255,255,0.06)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "transparent"; }}>
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    "rgba(255,255,255,0.06)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    "transparent";
+                }}
+              >
                 {t.nav[item.key as keyof typeof t.nav]}
               </button>
             ))}
             <div className="pt-2 px-4">
-              <button onClick={() => { navigate("/submit-idea"); setMenuOpen(false); }}
+              <button
+                onClick={() => {
+                  navigate("/submit-idea");
+                  setMenuOpen(false);
+                }}
                 className="flex items-center justify-center gap-2 w-full py-2.5 text-white text-sm font-semibold rounded-md"
-                style={{ backgroundColor: "var(--primary)" }}>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                style={{ backgroundColor: "var(--primary)" }}
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
                 </svg>
                 {t.nav.ideaForm}
               </button>

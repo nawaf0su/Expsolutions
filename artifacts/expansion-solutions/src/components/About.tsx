@@ -28,46 +28,47 @@ export function About({ t }: { t: T }) {
           {/* Visual card — stays dark for contrast */}
           <div className="relative">
             <div
-              className="rounded-2xl p-8 overflow-hidden"
+              className="rounded-2xl overflow-hidden"
               style={{
                 background: "linear-gradient(145deg, var(--secondary), var(--secondary-lt))",
                 boxShadow: "0 20px 50px rgba(11,44,61,0.18)",
               }}
             >
-              <div className="space-y-6">
-                {[
-                  { label: t.values.items[0].title, icon: "💡", pct: 90 },
-                  { label: t.values.items[1].title, icon: "⭐", pct: 95 },
-                  { label: t.values.items[3].title, icon: "🤝", pct: 88 },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4">
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"
-                      style={{ backgroundColor: "rgba(0,168,200,0.18)" }}
-                    >
-                      {item.icon}
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-white font-semibold mb-2 text-sm">{item.label}</p>
-                      <div
-                        className="h-1.5 rounded-full w-full overflow-hidden"
-                        style={{ backgroundColor: "rgba(255,255,255,0.10)" }}
-                      >
-                        <div
-                          className="h-full rounded-full"
-                          style={{
-                            width: `${item.pct}%`,
-                            background: "linear-gradient(to right, var(--primary), var(--accent))",
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <span className="text-xs font-bold" style={{ color: "var(--accent)", minWidth: "2.5rem", textAlign: "end" }}>
-                      {item.pct}%
-                    </span>
+              {[
+                { icon: t.values.items[0].icon, title: t.values.items[0].title, desc: t.values.items[0].desc },
+                { icon: t.values.items[1].icon, title: t.values.items[1].title, desc: t.values.items[1].desc },
+                { icon: t.values.items[3].icon, title: t.values.items[3].title, desc: t.values.items[3].desc },
+              ].map((item, i, arr) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-5 px-8 py-7"
+                  style={{
+                    borderBottom: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                  }}
+                >
+                  {/* Icon badge */}
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0 mt-0.5"
+                    style={{ backgroundColor: "rgba(0,168,200,0.15)", border: "1px solid rgba(0,168,200,0.20)" }}
+                  >
+                    {item.icon}
                   </div>
-                ))}
-              </div>
+
+                  {/* Text + accent */}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white font-bold text-base mb-1">{item.title}</p>
+                    <p className="text-sm leading-relaxed mb-3" style={{ color: "rgba(255,255,255,0.55)" }}>
+                      {item.desc}
+                    </p>
+                    {/* Decorative brand accent bar — no numbers, purely visual */}
+                    <div className="flex items-center gap-1.5">
+                      <div className="h-0.5 w-10 rounded-full" style={{ background: "linear-gradient(to right, var(--primary), var(--accent))" }} />
+                      <div className="h-0.5 w-4 rounded-full" style={{ backgroundColor: "rgba(0,168,200,0.25)" }} />
+                      <div className="h-0.5 w-2 rounded-full" style={{ backgroundColor: "rgba(0,168,200,0.12)" }} />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
