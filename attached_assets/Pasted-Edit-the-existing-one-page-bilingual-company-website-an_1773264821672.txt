@@ -1,0 +1,362 @@
+Edit the existing one-page bilingual company website and make the following changes exactly.
+
+IMPORTANT:
+- Keep the website one page only.
+- Keep Arabic as the default language on first load.
+- Keep English as the secondary language with manual toggle.
+- Do not add fake information, fake stats, fake projects, testimonials, or made-up content.
+- Keep the same premium corporate visual style, brand colors, and overall section structure unless explicitly changed below.
+
+==================================================
+1) REMOVE WHATSAPP BUTTONS
+==================================================
+
+Remove all WhatsApp buttons from the website.
+
+This includes:
+- the WhatsApp button in the navbar
+- the WhatsApp button in the hero section
+- the WhatsApp button in the contact section
+- any floating WhatsApp button if it exists
+- any repeated WhatsApp CTA buttons anywhere else
+
+Do not leave empty spaces after removal. Rebalance the layout cleanly.
+
+==================================================
+2) REPLACE MAIN CTA WITH "SUBMIT YOUR IDEA"
+==================================================
+
+Replace the previous WhatsApp-style CTA with a new CTA related to startup/project submission.
+
+Use this as the main CTA:
+
+Arabic:
+قدّم فكرتك
+
+English:
+Submit Your Idea
+
+Where to use it:
+- in the navbar as the main CTA button
+- in the hero section as the secondary CTA or main CTA, depending on layout
+- optionally in the contact section as a clear section CTA
+
+Behavior:
+- when clicked, it should smoothly scroll to a dedicated idea submission form section on the same page
+
+Do NOT make it open WhatsApp.
+Do NOT make it open a popup unless necessary.
+Preferred behavior: scroll to the form section.
+
+==================================================
+3) ADD NEW SECTION: IDEA SUBMISSION FORM
+==================================================
+
+Add a new dedicated section before the footer or inside the contact area called:
+
+Arabic:
+قدّم فكرتك
+
+English:
+Submit Your Idea
+
+This section is for startups, founders, and business owners who want to submit their idea/project to receive a quote and proposal.
+
+The design should feel premium, serious, and investor/startup-friendly.
+It should not look like a generic contact form.
+It should look like a project intake / discovery form.
+
+==================================================
+4) FORM PURPOSE
+==================================================
+
+The purpose of this form is:
+- to collect startup/project idea details
+- to understand the type of product the client wants
+- to help the company prepare a quote and proposal
+
+Add a short intro above the form:
+
+Arabic:
+شاركنا فكرتك ومعلومات مشروعك، وسنقوم بمراجعتها لإعداد عرض سعر ومقترح مناسب لاحتياجاتك.
+
+English:
+Share your idea and project details with us, and we will review them to prepare a suitable quotation and proposal for your needs.
+
+==================================================
+5) FORM FIELDS
+==================================================
+
+Add a professional multi-field form with these fields.
+
+A) Basic Contact Information
+- الاسم الكامل / Full Name
+- البريد الإلكتروني / Email
+- رقم الجوال / Mobile Number
+- اسم الشركة / Company Name
+
+B) Idea / Startup Information
+- اسم الفكرة / المشروع / Idea or Project Name
+- ما اسم الشركة الناشئة أو المشروع؟ / What is the startup or project called?
+- صف فكرتك باختصار / Briefly describe your idea
+- ما المشكلة التي يحلها المشروع؟ / What problem does the project solve?
+- من هو الجمهور المستهدف؟ / Who is the target audience?
+
+C) Technology Type
+Add a dropdown menu for the type of technology needed.
+
+Arabic options:
+- تطوير تطبيقات الجوال
+- تطوير مواقع إلكترونية
+- منتج SaaS
+- منصة ويب
+- متجر إلكتروني
+- لوحة تحكم إدارية
+- ذكاء اصطناعي
+- حلول مخصصة
+- أخرى
+
+English options:
+- Mobile App Development
+- Website Development
+- SaaS Product
+- Web Platform
+- E-commerce
+- Admin Dashboard
+- Artificial Intelligence
+- Custom Solution
+- Other
+
+D) Project Scope / Business Details
+- هل لديك نموذج أولي أو تصميمات؟ / Do you have a prototype or designs?
+  Options:
+  - نعم / Yes
+  - لا / No
+
+- ما المرحلة الحالية للمشروع؟ / What is the current stage of the project?
+  Options:
+  - مجرد فكرة / Idea stage
+  - نموذج أولي / Prototype
+  - مشروع قائم يحتاج تطوير / Existing project needing development
+  - أبحث عن فريق تقني / Looking for a technical team
+
+- ما الميزانية التقديرية؟ / Estimated budget
+  Suggested options:
+  - أقل من 5,000 دولار
+  - 5,000 - 15,000 دولار
+  - 15,000 - 50,000 دولار
+  - أكثر من 50,000 دولار
+  - أفضل مناقشتها لاحقاً
+
+  English:
+  - Under $5,000
+  - $5,000 - $15,000
+  - $15,000 - $50,000
+  - Above $50,000
+  - Prefer to discuss later
+
+- ما الإطار الزمني المتوقع؟ / Expected timeline
+  Options:
+  - بأسرع وقت
+  - خلال شهر
+  - خلال 2-3 أشهر
+  - أكثر من 3 أشهر
+  - غير محدد بعد
+
+  English:
+  - As soon as possible
+  - Within 1 month
+  - Within 2–3 months
+  - More than 3 months
+  - Not decided yet
+
+E) Additional Notes
+- تفاصيل إضافية / Additional Notes
+
+==================================================
+6) FORM SUBMISSION BEHAVIOR
+==================================================
+
+The form should NOT go to WhatsApp.
+
+The form should send to email:
+info@expantionsolution.com
+
+Since there is no backend, use mailto: behavior with JavaScript.
+
+When the user submits:
+- gather all form values
+- generate a clean email subject and body
+- open the user’s email client using mailto:
+
+Email target:
+mailto:info@expantionsolution.com
+
+Arabic email subject:
+طلب عرض سعر ومقترح مشروع جديد
+
+English email subject:
+New Project Quote & Proposal Request
+
+The generated email body should be very well structured and readable.
+
+Example Arabic structure:
+
+الاسم الكامل:
+البريد الإلكتروني:
+رقم الجوال:
+اسم الشركة:
+
+اسم الفكرة / المشروع:
+اسم الشركة الناشئة / المشروع:
+نوع التقنية المطلوبة:
+وصف الفكرة:
+المشكلة التي يحلها المشروع:
+الجمهور المستهدف:
+هل يوجد نموذج أولي أو تصميمات:
+المرحلة الحالية للمشروع:
+الميزانية التقديرية:
+الإطار الزمني المتوقع:
+تفاصيل إضافية:
+
+If English is active, generate the body in English labels.
+
+==================================================
+7) CONTACT SECTION UPDATE
+==================================================
+
+Keep the contact section, but simplify it.
+
+The contact section should contain:
+- phone number
+- email
+- short contact intro
+- one button that scrolls to the idea submission form
+
+Use button text:
+
+Arabic:
+ابدأ بإرسال فكرتك
+
+English:
+Start by Submitting Your Idea
+
+Do NOT include WhatsApp in the contact section anymore.
+
+==================================================
+8) HERO SECTION UPDATE
+==================================================
+
+Update the hero CTA buttons to match the new flow.
+
+Recommended hero buttons:
+
+Arabic:
+- تواصل معنا
+- قدّم فكرتك
+
+English:
+- Contact Us
+- Submit Your Idea
+
+Behavior:
+- "Contact Us" scrolls to contact section
+- "Submit Your Idea" scrolls to the idea submission form
+
+Do not include WhatsApp button in hero anymore.
+
+==================================================
+9) NAVBAR UPDATE
+==================================================
+
+Update the navbar CTA button.
+
+Remove WhatsApp CTA.
+Replace it with:
+
+Arabic:
+قدّم فكرتك
+
+English:
+Submit Your Idea
+
+It should scroll to the idea submission form.
+
+==================================================
+10) DESIGN REQUIREMENTS FOR THE NEW FORM
+==================================================
+
+The new form section must look polished and premium.
+
+Requirements:
+- use a clean, spacious layout
+- two-column layout on desktop where appropriate
+- one-column layout on mobile
+- clear labels
+- elegant input fields
+- soft borders
+- comfortable spacing
+- readable typography
+- section background that is easy on the eyes
+- strong contrast
+- no noisy white glare
+
+Use the existing color palette and the improved softer background system:
+- page background should remain soft, not pure white
+- cards can stay white
+- text must remain highly readable
+
+==================================================
+11) BILINGUAL SUPPORT
+==================================================
+
+Make sure every new label, heading, dropdown, button, helper text, and email body works in both Arabic and English.
+
+Arabic:
+- default language
+- RTL layout
+
+English:
+- LTR layout
+
+The language switcher should update:
+- section headings
+- field labels
+- placeholders if used
+- buttons
+- dropdown options
+- intro text
+- email subject/body labels
+
+==================================================
+12) DO NOT ADD
+==================================================
+
+Do not add:
+- WhatsApp buttons
+- fake startup statistics
+- testimonials
+- portfolio items
+- team members
+- process timeline unless already in the site
+- extra pages
+- popup chat widgets
+- unnecessary animations
+- noisy backgrounds behind the form
+
+==================================================
+13) DELIVERABLE
+==================================================
+
+Return the fully updated code for:
+- index.html
+- style.css
+- script.js
+
+Make sure the final result:
+- keeps Arabic first
+- removes WhatsApp CTAs
+- adds a premium startup idea submission form
+- sends the form through mailto to info@expantionsolution.com
+- preserves the one-page layout
+- remains visually premium and easy to read
