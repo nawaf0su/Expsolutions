@@ -32,8 +32,8 @@ export function Hero({ t }: { t: T }) {
           <img
             src="/logo.png"
             alt={t.companyName}
-            className="h-20 w-auto object-contain"
-            style={{ maxWidth: "260px", filter: "brightness(0) invert(1)" }}
+            className="w-auto object-contain"
+            style={{ height: "180px", maxWidth: "420px", mixBlendMode: "screen" }}
           />
         </div>
 

@@ -20,8 +20,8 @@ export function Footer({ t }: { t: T }) {
               <img
                 src="/logo.png"
                 alt={t.companyName}
-                className="h-12 w-auto object-contain"
-                style={{ maxWidth: "180px", filter: "brightness(0) invert(1)", opacity: 0.9 }}
+                className="w-auto object-contain"
+                style={{ height: "100px", maxWidth: "260px", mixBlendMode: "screen" }}
               />
             </div>
             <p className="text-sm leading-relaxed max-w-sm" style={{ color: "rgba(255,255,255,0.55)" }}>

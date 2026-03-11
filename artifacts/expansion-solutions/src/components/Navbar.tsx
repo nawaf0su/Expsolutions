@@ -67,8 +67,8 @@ export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
             <img
               src="/logo.png"
               alt={t.companyName}
-              className="h-10 w-auto object-contain"
-              style={{ maxWidth: "160px" }}
+              className="w-auto object-contain"
+              style={{ height: "90px", maxWidth: "260px", mixBlendMode: "screen" }}
             />
           </div>
 
