@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import type { content } from "@/content";
 
 type T = (typeof content)["ar"] | (typeof content)["en"];
@@ -7,6 +8,7 @@ interface NavbarProps {
   t: T;
   lang: string;
   onToggleLang: () => void;
+  onMainPage?: boolean;
 }
 
 const navItems = [
@@ -17,10 +19,11 @@ const navItems = [
   { key: "contact",  href: "#contact" },
 ] as const;
 
-export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
+export function Navbar({ t, lang, onToggleLang, onMainPage = true }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -29,30 +32,34 @@ export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
   }, []);
 
   useEffect(() => {
+    if (!onMainPage) return;
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        });
-      },
+      entries => { entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id); }); },
       { threshold: 0.3 }
     );
     const sections = document.querySelectorAll("section[id]");
-    sections.forEach((s) => observer.observe(s));
+    sections.forEach(s => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, [onMainPage]);
 
   const scrollTo = (href: string) => {
-    const target = document.querySelector(href) as HTMLElement | null;
-    if (target) {
-      const y = target.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: y, behavior: "smooth" });
+    if (!onMainPage) {
+      navigate("/");
+      setTimeout(() => {
+        const target = document.querySelector(href) as HTMLElement | null;
+        if (target) {
+          const y = target.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }, 300);
+    } else {
+      const target = document.querySelector(href) as HTMLElement | null;
+      if (target) {
+        const y = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
     }
     setMenuOpen(false);
-  };
-
-  const scrollToIdeaForm = () => {
-    scrollTo("#idea-form");
   };
 
   return (
@@ -68,16 +75,16 @@ export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
         <div className="flex items-center justify-between h-16 lg:h-[70px]">
 
           {/* Logo */}
-          <div className="flex items-center shrink-0">
+          <button onClick={() => navigate("/")} className="flex items-center shrink-0">
             <img src="/logo.png" alt={t.companyName} className="w-auto object-contain"
               style={{ height: "90px", maxWidth: "260px", mixBlendMode: "screen" }} />
-          </div>
+          </button>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-0.5">
-            {navItems.map((item) => {
+            {navItems.map(item => {
               const label = t.nav[item.key as keyof typeof t.nav];
-              const isActive = activeSection === item.href.slice(1);
+              const isActive = onMainPage && activeSection === item.href.slice(1);
               return (
                 <button key={item.key} onClick={() => scrollTo(item.href)}
                   className="px-3 py-2 rounded-md text-sm font-medium transition-all duration-200"
@@ -102,7 +109,7 @@ export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
             </button>
 
             {/* Submit Your Idea CTA */}
-            <button onClick={scrollToIdeaForm}
+            <button onClick={() => { navigate("/submit-idea"); setMenuOpen(false); }}
               className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 text-white text-sm font-semibold rounded-md transition-all duration-200 shadow-sm"
               style={{ backgroundColor: "var(--primary)" }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
@@ -127,7 +134,7 @@ export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="lg:hidden border-t border-white/10 py-3 space-y-0.5">
-            {navItems.map((item) => (
+            {navItems.map(item => (
               <button key={item.key} onClick={() => scrollTo(item.href)}
                 className="block w-full text-start px-4 py-2.5 text-sm font-medium rounded-md transition-colors"
                 style={{ color: "rgba(255,255,255,0.8)" }}
@@ -137,7 +144,7 @@ export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
               </button>
             ))}
             <div className="pt-2 px-4">
-              <button onClick={scrollToIdeaForm}
+              <button onClick={() => { navigate("/submit-idea"); setMenuOpen(false); }}
                 className="flex items-center justify-center gap-2 w-full py-2.5 text-white text-sm font-semibold rounded-md"
                 style={{ backgroundColor: "var(--primary)" }}>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

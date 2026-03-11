@@ -8,7 +8,6 @@ import { Services } from "@/components/Services";
 import { Clients } from "@/components/Clients";
 import { Closing } from "@/components/Closing";
 import { Contact } from "@/components/Contact";
-import { IdeaForm } from "@/components/IdeaForm";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -16,7 +15,7 @@ export default function Home() {
 
   return (
     <div dir={t.dir} lang={t.lang} className="min-h-screen">
-      <Navbar t={t} lang={lang} onToggleLang={toggleLang} />
+      <Navbar t={t} lang={lang} onToggleLang={toggleLang} onMainPage={true} />
       <Hero t={t} />
       <About t={t} />
       <VisionMission t={t} />
@@ -24,8 +23,7 @@ export default function Home() {
       <Services t={t} />
       <Clients t={t} />
       <Closing t={t} />
-      <Contact t={t} />
-      <IdeaForm t={t} lang={lang} />
+      <Contact t={t} lang={lang} />
       <Footer t={t} />
     </div>
   );

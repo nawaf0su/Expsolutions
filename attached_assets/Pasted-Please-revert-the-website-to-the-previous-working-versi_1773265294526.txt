@@ -1,0 +1,234 @@
+Please revert the website to the previous working version before the large edits related to the idea submission form.
+
+We only want ONE small change to the existing design.
+
+IMPORTANT:
+Do not redesign the website.
+Do not restructure the sections.
+Do not modify the layout.
+Do not add new sections to the main page.
+
+Keep the current website exactly the same as before except for the change described below.
+
+--------------------------------------------------
+1. REMOVE WHATSAPP BUTTON FROM NAVBAR
+--------------------------------------------------
+
+In the navbar, remove the WhatsApp button completely.
+
+Do NOT remove any other elements.
+
+--------------------------------------------------
+2. REPLACE IT WITH A NEW BUTTON
+--------------------------------------------------
+
+Replace the WhatsApp button with a new CTA button.
+
+Arabic text:
+قدّم فكرتك
+
+English text:
+Submit Your Idea
+
+This button must appear in the same position where the WhatsApp button previously existed.
+
+--------------------------------------------------
+3. BUTTON BEHAVIOR
+--------------------------------------------------
+
+When the "Submit Your Idea" button is clicked:
+
+It should open a NEW PAGE.
+
+Page URL example:
+submit-idea.html
+
+Do NOT open a popup.
+Do NOT scroll to a section.
+It must be a separate page.
+
+--------------------------------------------------
+4. CREATE NEW PAGE: submit-idea.html
+--------------------------------------------------
+
+Create a new page called:
+
+submit-idea.html
+
+This page is dedicated to startup / project idea submission.
+
+The page must follow the same design style as the main website:
+- same colors
+- same fonts
+- same header
+- same footer
+- same language toggle
+- same responsive design
+
+This page should contain a professional project submission form.
+
+--------------------------------------------------
+5. FORM TITLE
+--------------------------------------------------
+
+Arabic:
+قدّم فكرتك
+
+English:
+Submit Your Idea
+
+Short description above the form:
+
+Arabic:
+شاركنا تفاصيل فكرتك أو مشروعك وسنقوم بمراجعتها لإعداد عرض سعر ومقترح مناسب لاحتياجاتك.
+
+English:
+Share the details of your idea or project and we will review it to prepare a suitable quotation and proposal.
+
+--------------------------------------------------
+6. FORM FIELDS
+--------------------------------------------------
+
+The form should collect the following information:
+
+Basic Information
+
+Arabic / English:
+
+- الاسم الكامل / Full Name
+- البريد الإلكتروني / Email
+- رقم الجوال / Mobile Number
+- اسم الشركة / Company Name
+
+Project Information
+
+- اسم الفكرة أو المشروع / Idea or Project Name
+- اسم الشركة الناشئة أو المشروع / Startup or Project Name
+- وصف مختصر للفكرة / Brief Idea Description
+- ما المشكلة التي يحلها المشروع؟ / What problem does the project solve?
+- من هو الجمهور المستهدف؟ / Target Audience
+
+Technology Type Dropdown
+
+Arabic options:
+- تطوير تطبيقات الجوال
+- تطوير مواقع إلكترونية
+- منتج SaaS
+- منصة ويب
+- متجر إلكتروني
+- لوحة تحكم إدارية
+- ذكاء اصطناعي
+- حلول مخصصة
+- أخرى
+
+English options:
+- Mobile App Development
+- Website Development
+- SaaS Product
+- Web Platform
+- E-commerce
+- Admin Dashboard
+- Artificial Intelligence
+- Custom Solution
+- Other
+
+Project Details
+
+- هل لديك نموذج أولي أو تصميمات؟ / Do you have a prototype or designs?
+Options:
+Yes / No
+
+- المرحلة الحالية للمشروع / Project Stage
+Options:
+Idea stage
+Prototype
+Existing product
+Looking for development team
+
+- الميزانية التقديرية / Estimated Budget
+Options:
+Under $5,000
+$5,000 – $15,000
+$15,000 – $50,000
+Above $50,000
+Prefer to discuss later
+
+- الإطار الزمني المتوقع / Expected Timeline
+Options:
+ASAP
+1 month
+2–3 months
+More than 3 months
+Not decided
+
+Additional field:
+
+- تفاصيل إضافية / Additional Notes
+
+--------------------------------------------------
+7. FORM SUBMISSION
+--------------------------------------------------
+
+When the form is submitted:
+
+It should send the information to the email:
+
+info@expantionsolution.com
+
+Since this is a static website without backend, implement submission using:
+
+mailto:info@expantionsolution.com
+
+Use JavaScript to generate the email body containing all form fields.
+
+Email subject:
+
+Arabic:
+طلب عرض سعر لمشروع جديد
+
+English:
+New Project Quote Request
+
+Email body must include all form details in a clean structured format.
+
+--------------------------------------------------
+8. BILINGUAL SUPPORT
+--------------------------------------------------
+
+This page must support both languages like the main website.
+
+Arabic:
+- default
+- RTL layout
+
+English:
+- LTR layout
+
+The language switcher should translate:
+- titles
+- field labels
+- dropdown options
+- button text
+
+--------------------------------------------------
+9. KEEP MAIN SITE UNCHANGED
+--------------------------------------------------
+
+The main page must remain exactly the same except for:
+
+Replacing the WhatsApp navbar button with the "Submit Your Idea" button.
+
+No other layout or design changes should be made.
+
+--------------------------------------------------
+10. FINAL OUTPUT
+--------------------------------------------------
+
+Provide the updated files:
+
+index.html
+submit-idea.html
+style.css
+script.js
+
+Ensure both pages work correctly together.
