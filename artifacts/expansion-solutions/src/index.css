@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Brand palette — direct hex, no HSL conflict */
   --color-brand-primary:      #00A8C8;
   --color-brand-primary-dark: #0090ae;
   --color-brand-secondary:    #0B2C3D;
   --color-brand-secondary-lt: #153d53;
   --color-brand-accent:       #2ED0E8;
-  --color-brand-bg-light:     #F5F7F9;
+  --color-brand-bg:           #F2F6F8;
+  --color-brand-bg-alt:       #EDF3F6;
 
   --color-background: hsl(var(--tw-background));
   --color-foreground: hsl(var(--tw-foreground));
@@ -56,29 +56,41 @@
 
 /* =====================
    CSS VARIABLE SYSTEM
-   Raw CSS vars for components using var()
    ===================== */
 :root {
-  /* Brand palette (hex) */
-  --primary:      #00A8C8;
-  --primary-dark: #0090ae;
-  --secondary:    #0B2C3D;
-  --secondary-lt: #153d53;
-  --accent:       #2ED0E8;
-  --bg-light:     #F5F7F9;
-  --white:        #FFFFFF;
-  --text-dark:    #1A1A1A;
-  --text-muted:   #5B6670;
-  --border-light: #D9E3EA;
+  /* Brand palette */
+  --primary:       #00A8C8;
+  --primary-dark:  #0090ae;
+  --secondary:     #0B2C3D;
+  --secondary-lt:  #153d53;
+  --accent:        #2ED0E8;
+
+  /* Page backgrounds */
+  --page-bg:       #F2F6F8;
+  --section-alt:   #EDF3F6;
+  --bg-light:      #F2F6F8;
+
+  /* Text colors */
+  --text-heading:  #0B2C3D;
+  --text-body:     #2E3A40;
+  --text-dark:     #0B2C3D;
+  --text-muted:    #5B6670;
+
+  /* Card styles */
+  --card-bg:       #FFFFFF;
+  --card-border:   #E3EBF0;
+  --card-shadow:   0 8px 20px rgba(0,0,0,0.04);
+
+  --border-light:  #E3EBF0;
+  --white:         #FFFFFF;
 
   --button-outline: rgba(0,0,0,.10);
   --badge-outline: rgba(0,0,0,.05);
-  --opaque-button-border-intensity: -8;
   --elevate-1: rgba(0,0,0,.03);
   --elevate-2: rgba(0,0,0,.08);
 
-  /* Tailwind semantic tokens (renamed to --tw-* to avoid conflict) */
-  --tw-background: 210 33% 98%;
+  /* Tailwind semantic tokens */
+  --tw-background: 206 24% 96%;
   --tw-foreground: 213 43% 11%;
   --tw-border: 210 22% 88%;
   --tw-card: 0 0% 100%;
@@ -95,7 +107,7 @@
   --tw-input: 210 22% 88%;
   --tw-ring: 194 100% 39%;
 
-  --app-font-sans: 'Inter', 'IBM Plex Sans Arabic', sans-serif;
+  --app-font-sans: 'Inter', 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
   --app-font-serif: Georgia, serif;
   --app-font-mono: Menlo, monospace;
   --radius: 0.625rem;
@@ -118,7 +130,7 @@
 @layer base {
   * {
     box-sizing: border-box;
-    border-color: #D9E3EA;
+    border-color: var(--card-border);
   }
 
   html {
@@ -127,14 +139,23 @@
 
   body {
     font-family: 'Inter', sans-serif;
-    background-color: #fff;
-    color: var(--text-dark);
+    background-color: var(--page-bg);
+    color: var(--text-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   :lang(ar), [dir="rtl"] {
-    font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif;
+    font-family: 'Cairo', 'IBM Plex Sans Arabic', 'Inter', sans-serif;
+  }
+
+  p {
+    line-height: 1.8;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--text-heading);
+    line-height: 1.35;
   }
 }
 
@@ -203,23 +224,6 @@
 @layer utilities {
   input[type="search"]::-webkit-search-cancel-button {
     display: none;
-  }
-
-  .no-default-hover-elevate {}
-  .no-default-active-elevate {}
-
-  .toggle-elevate::before,
-  .toggle-elevate-2::before {
-    content: "";
-    pointer-events: none;
-    position: absolute;
-    inset: 0px;
-    border-radius: inherit;
-    z-index: -1;
-  }
-
-  .toggle-elevate.toggle-elevated::before {
-    background-color: var(--elevate-2);
   }
 
   .hover-elevate:not(.no-default-hover-elevate),

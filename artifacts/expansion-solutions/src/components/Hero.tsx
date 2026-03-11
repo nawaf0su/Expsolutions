@@ -1,6 +1,5 @@
 import { WHATSAPP_URL } from "@/content";
 import type { content } from "@/content";
-import { useEffect, useRef } from "react";
 
 type T = (typeof content)["ar"] | (typeof content)["en"];
 
@@ -9,68 +8,31 @@ export function Hero({ t }: { t: T }) {
     document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const shapesRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const shapes = shapesRef.current?.querySelectorAll(".geo-shape");
-    if (!shapes) return;
-    let rafId: number;
-    const animate = () => {
-      shapes.forEach((shape, i) => {
-        const el = shape as HTMLElement;
-        const t2 = Date.now() / 1000;
-        const speed = 0.25 + i * 0.08;
-        const amp = 7 + i * 2.5;
-        el.style.transform = `translateY(${Math.sin(t2 * speed) * amp}px) rotate(${Math.cos(t2 * speed * 0.7) * 4}deg)`;
-      });
-      rafId = requestAnimationFrame(animate);
-    };
-    rafId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
-
   return (
     <section
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ backgroundColor: "var(--secondary)" }}
+      style={{
+        background: "linear-gradient(160deg, #0B2C3D 0%, #0d3447 55%, #0f3d53 100%)",
+      }}
     >
-      {/* Background geometric shapes */}
-      <div ref={shapesRef} className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="geo-shape absolute top-[12%] right-[6%] w-72 h-72 rounded-full"
-          style={{ border: "2px solid rgba(0,168,200,0.15)" }} />
-        <div className="geo-shape absolute top-[35%] left-[4%] w-44 h-44 rounded-2xl rotate-12"
-          style={{ border: "1px solid rgba(46,208,232,0.12)" }} />
-        <div className="geo-shape absolute bottom-[18%] right-[12%] w-36 h-36 rounded-full"
-          style={{ backgroundColor: "rgba(0,168,200,0.04)", border: "1px solid rgba(0,168,200,0.15)" }} />
-        <div className="geo-shape absolute top-[58%] left-[8%] w-28 h-28 rotate-45"
-          style={{ border: "2px solid rgba(46,208,232,0.08)" }} />
-        <div className="geo-shape absolute top-[8%] left-[28%] w-16 h-16 rounded-full"
-          style={{ backgroundColor: "rgba(46,208,232,0.06)", border: "1px solid rgba(46,208,232,0.15)" }} />
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0"
-          style={{
-            opacity: 0.03,
-            backgroundImage:
-              "linear-gradient(rgba(0,168,200,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(0,168,200,0.8) 1px, transparent 1px)",
-            backgroundSize: "55px 55px",
-          }}
-        />
-        {/* Radial gradient glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(ellipse, rgba(0,168,200,0.08) 0%, transparent 70%)" }}
-        />
-      </div>
+      {/* Subtle top-right radial glow only — no grid, no busy patterns */}
+      <div
+        className="absolute top-0 end-0 w-[600px] h-[600px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at top right, rgba(0,168,200,0.10) 0%, transparent 65%)" }}
+      />
+      <div
+        className="absolute bottom-0 start-0 w-[400px] h-[400px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at bottom left, rgba(46,208,232,0.06) 0%, transparent 65%)" }}
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
         {/* Badge */}
         <div
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-8 animate-fade-in"
           style={{
             border: "1px solid rgba(0,168,200,0.35)",
-            backgroundColor: "rgba(0,168,200,0.08)",
+            backgroundColor: "rgba(0,168,200,0.10)",
             color: "var(--accent)",
           }}
         >
@@ -82,24 +44,26 @@ export function Hero({ t }: { t: T }) {
         </div>
 
         {/* Headline */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-slide-up">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-tight mb-6 animate-slide-up">
           {t.hero.headline}
         </h1>
 
-        {/* Subheadline */}
-        <p
-          className="text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed animate-slide-up-delay"
-          style={{ color: "rgba(255,255,255,0.7)" }}
+        {/* Sub-headline — inside a frosted container for clean readability */}
+        <div
+          className="max-w-2xl mx-auto mb-10 animate-slide-up-delay rounded-xl px-6 py-4"
+          style={{ backgroundColor: "rgba(255,255,255,0.05)", backdropFilter: "blur(4px)" }}
         >
-          {t.hero.subheadline}
-        </p>
+          <p className="text-base sm:text-lg" style={{ color: "rgba(255,255,255,0.82)", lineHeight: "1.8" }}>
+            {t.hero.subheadline}
+          </p>
+        </div>
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up-delay-2">
           <button
             onClick={scrollToContact}
-            className="w-full sm:w-auto px-8 py-3.5 text-white font-semibold rounded-lg transition-all duration-200 hover:-translate-y-0.5"
-            style={{ backgroundColor: "var(--primary)" }}
+            className="w-full sm:w-auto px-9 py-3.5 text-white font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-base"
+            style={{ backgroundColor: "var(--primary)", boxShadow: "0 4px 18px rgba(0,168,200,0.30)" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}
           >
@@ -109,18 +73,18 @@ export function Hero({ t }: { t: T }) {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-3.5 font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2 hover:-translate-y-0.5"
+            className="w-full sm:w-auto px-9 py-3.5 font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 hover:-translate-y-0.5 text-base"
             style={{
-              border: "2px solid rgba(0,168,200,0.5)",
+              border: "2px solid rgba(0,168,200,0.45)",
               color: "var(--accent)",
               backgroundColor: "transparent",
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.borderColor = "var(--primary)";
-              (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(0,168,200,0.1)";
+              (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(0,168,200,0.10)";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,168,200,0.5)";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,168,200,0.45)";
               (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
             }}
           >
@@ -133,8 +97,8 @@ export function Hero({ t }: { t: T }) {
 
         {/* Scroll indicator */}
         <div className="mt-20 flex justify-center">
-          <div className="flex flex-col items-center gap-2 animate-bounce-slow" style={{ color: "rgba(255,255,255,0.3)" }}>
-            <div className="w-6 h-10 rounded-full flex justify-center pt-2" style={{ border: "2px solid rgba(255,255,255,0.2)" }}>
+          <div className="flex flex-col items-center gap-2 animate-bounce-slow" style={{ color: "rgba(255,255,255,0.25)" }}>
+            <div className="w-6 h-10 rounded-full flex justify-center pt-2" style={{ border: "2px solid rgba(255,255,255,0.18)" }}>
               <div className="w-1.5 h-3 rounded-full animate-scroll-down" style={{ backgroundColor: "var(--primary)" }} />
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type CSSProperties, type FocusEventHandler } from "react";
+import { useState, type FormEvent, type CSSProperties } from "react";
 import type { content } from "@/content";
 import { WHATSAPP_URL, PHONE, EMAIL } from "@/content";
 import { SectionWrapper } from "@/components/SectionWrapper";
@@ -6,117 +6,108 @@ import { SectionWrapper } from "@/components/SectionWrapper";
 type T = (typeof content)["ar"] | (typeof content)["en"];
 
 export function Contact({ t, lang }: { t: T; lang: string }) {
-  const [form, setForm] = useState({
-    name: "",
-    mobile: "",
-    email: "",
-    company: "",
-    message: "",
-  });
+  const [form, setForm] = useState({ name: "", mobile: "", email: "", company: "", message: "" });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    const isAr = lang === "ar";
     const subject = encodeURIComponent(t.contact.emailSubject);
-
-    const body = isAr
+    const body = lang === "ar"
       ? `الاسم: ${form.name}\nرقم الجوال: ${form.mobile}\nالبريد الإلكتروني: ${form.email}\nاسم الشركة: ${form.company}\nالرسالة: ${form.message}`
       : `Name: ${form.name}\nMobile: ${form.mobile}\nEmail: ${form.email}\nCompany: ${form.company}\nMessage: ${form.message}`;
-
-    const encodedBody = encodeURIComponent(body);
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${encodedBody}`;
+    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
   };
 
-  const inputClass =
-    "w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 text-sm bg-white";
-  const inputStyle = {
-    border: "1px solid var(--border-light)",
-    color: "var(--text-dark)",
+  const focusInput = (el: HTMLInputElement | HTMLTextAreaElement) => {
+    el.style.borderColor = "var(--primary)";
+    el.style.boxShadow = "0 0 0 3px rgba(0,168,200,0.12)";
+  };
+  const blurInput = (el: HTMLInputElement | HTMLTextAreaElement) => {
+    el.style.borderColor = "var(--card-border)";
+    el.style.boxShadow = "none";
   };
 
-  const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderColor = "var(--primary)";
-    e.currentTarget.style.boxShadow = "0 0 0 3px rgba(0,168,200,0.12)";
-  };
-  const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    e.currentTarget.style.borderColor = "var(--border-light)";
-    e.currentTarget.style.boxShadow = "none";
-  };
+  const baseInput = "w-full px-4 py-3 rounded-xl outline-none transition-all duration-200 text-sm bg-white";
+  const baseInputStyle: CSSProperties = { border: "1px solid var(--card-border)", color: "var(--text-body)" };
 
   return (
-    <SectionWrapper id="contact" style={{ backgroundColor: "var(--bg-light)" } as CSSProperties}>
+    <SectionWrapper id="contact" style={{ backgroundColor: "var(--section-alt)" } as CSSProperties}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         <div className="text-center mb-14">
-          <span className="inline-block text-sm font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--primary)" }}>
+          <span
+            className="inline-block text-xs font-bold tracking-widest uppercase mb-4 px-3 py-1 rounded-full"
+            style={{ color: "var(--primary)", backgroundColor: "rgba(0,168,200,0.08)", border: "1px solid rgba(0,168,200,0.15)" }}
+          >
             {t.contact.title}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold" style={{ color: "var(--secondary)" }}>
+          <h2 className="text-3xl sm:text-4xl font-bold mt-2" style={{ color: "var(--text-heading)" }}>
             {t.contact.title}
           </h2>
-          <div className="w-16 h-1 rounded-full mx-auto mt-4" style={{ background: "linear-gradient(to right, var(--primary), var(--accent))" }} />
-          <p className="mt-4 text-base" style={{ color: "var(--text-muted)" }}>{t.contact.subtitle}</p>
+          <div className="w-14 h-1 rounded-full mx-auto mt-4" style={{ background: "linear-gradient(to right, var(--primary), var(--accent))" }} />
+          <p className="mt-5 text-base" style={{ color: "var(--text-muted)" }}>{t.contact.subtitle}</p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-10 items-start">
-          {/* Info cards */}
-          <div className="lg:col-span-2 space-y-5">
+        <div className="grid lg:grid-cols-5 gap-8 items-start">
+
+          {/* Contact info cards */}
+          <div className="lg:col-span-2 space-y-4">
+
             {/* Phone */}
             <a
               href={`tel:${PHONE}`}
-              className="flex items-center gap-5 bg-white rounded-2xl p-6 transition-all duration-300 hover:-translate-y-0.5"
-              style={{ border: "1px solid var(--border-light)", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,168,200,0.10)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)"; }}
+              className="flex items-center gap-5 bg-white rounded-2xl p-6 transition-all duration-300 hover:-translate-y-0.5 block"
+              style={{ border: "1px solid var(--card-border)", boxShadow: "var(--card-shadow)" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 32px rgba(0,168,200,0.09)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "var(--card-shadow)"; }}
             >
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-md shrink-0" style={{ background: "linear-gradient(135deg, var(--primary), var(--accent))" }}>
+              <div className="w-13 h-13 w-14 h-14 rounded-xl flex items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg, var(--primary), var(--accent))" }}>
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                 </svg>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest font-medium mb-1" style={{ color: "var(--text-muted)" }}>
+                <p className="text-xs uppercase tracking-widest font-semibold mb-1" style={{ color: "var(--text-muted)" }}>
                   {t.contact.phone}
                 </p>
-                <p className="font-bold text-lg" style={{ color: "var(--secondary)" }} dir="ltr">{PHONE}</p>
+                <p className="font-bold text-lg" style={{ color: "var(--text-heading)" }} dir="ltr">{PHONE}</p>
               </div>
             </a>
 
             {/* Email */}
             <a
               href={`mailto:${EMAIL}`}
-              className="flex items-center gap-5 bg-white rounded-2xl p-6 transition-all duration-300 hover:-translate-y-0.5"
-              style={{ border: "1px solid var(--border-light)", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(0,168,200,0.10)"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)"; }}
+              className="flex items-center gap-5 bg-white rounded-2xl p-6 transition-all duration-300 hover:-translate-y-0.5 block"
+              style={{ border: "1px solid var(--card-border)", boxShadow: "var(--card-shadow)" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 32px rgba(11,44,61,0.08)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "var(--card-shadow)"; }}
             >
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-md shrink-0" style={{ background: "linear-gradient(135deg, var(--secondary), var(--secondary-lt))" }}>
+              <div className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg, var(--secondary), var(--secondary-lt))" }}>
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
                 </svg>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest font-medium mb-1" style={{ color: "var(--text-muted)" }}>
+                <p className="text-xs uppercase tracking-widest font-semibold mb-1" style={{ color: "var(--text-muted)" }}>
                   {t.contact.email}
                 </p>
-                <p className="font-bold text-sm break-all" style={{ color: "var(--secondary)" }} dir="ltr">{EMAIL}</p>
+                <p className="font-bold text-sm break-all" style={{ color: "var(--text-heading)" }} dir="ltr">{EMAIL}</p>
               </div>
             </a>
 
-            {/* ONE WhatsApp button in contact section */}
+            {/* WhatsApp */}
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl text-white font-bold text-base transition-all duration-300 hover:-translate-y-0.5"
-              style={{ backgroundColor: "#25D366", boxShadow: "0 4px 16px rgba(37,211,102,0.25)" }}
+              style={{ backgroundColor: "#25D366", boxShadow: "0 6px 20px rgba(37,211,102,0.20)" }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = "#1da855";
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 24px rgba(37,211,102,0.35)";
+                (e.currentTarget as HTMLElement).style.backgroundColor = "#1fba59";
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 10px 30px rgba(37,211,102,0.30)";
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.backgroundColor = "#25D366";
-                (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 16px rgba(37,211,102,0.25)";
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 20px rgba(37,211,102,0.20)";
               }}
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -126,91 +117,71 @@ export function Contact({ t, lang }: { t: T; lang: string }) {
             </a>
           </div>
 
-          {/* Contact form — submits via mailto */}
+          {/* Contact form */}
           <form
             onSubmit={handleSubmit}
             className="lg:col-span-3 bg-white rounded-2xl p-8"
-            style={{ border: "1px solid var(--border-light)", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
+            style={{ border: "1px solid var(--card-border)", boxShadow: "var(--card-shadow)" }}
           >
             <div className="grid sm:grid-cols-2 gap-5">
+
               <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-dark)" }}>
+                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-heading)" }}>
                   {t.contact.form.nameLbl} <span style={{ color: "var(--primary)" }}>*</span>
                 </label>
-                <input
-                  type="text"
-                  required
-                  placeholder={t.contact.form.namePlaceholder}
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className={inputClass}
-                  style={inputStyle}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
+                <input type="text" required placeholder={t.contact.form.namePlaceholder}
+                  value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className={baseInput} style={baseInputStyle}
+                  onFocus={(e) => focusInput(e.currentTarget)}
+                  onBlur={(e) => blurInput(e.currentTarget)}
                 />
               </div>
+
               <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-dark)" }}>
+                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-heading)" }}>
                   {t.contact.form.mobileLbl} <span style={{ color: "var(--primary)" }}>*</span>
                 </label>
-                <input
-                  type="tel"
-                  required
-                  placeholder={t.contact.form.mobilePlaceholder}
-                  value={form.mobile}
-                  onChange={(e) => setForm({ ...form, mobile: e.target.value })}
-                  className={inputClass}
-                  style={inputStyle}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                  dir="ltr"
+                <input type="tel" required placeholder={t.contact.form.mobilePlaceholder}
+                  value={form.mobile} onChange={(e) => setForm({ ...form, mobile: e.target.value })}
+                  className={baseInput} style={baseInputStyle} dir="ltr"
+                  onFocus={(e) => focusInput(e.currentTarget)}
+                  onBlur={(e) => blurInput(e.currentTarget)}
                 />
               </div>
+
               <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-dark)" }}>
+                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-heading)" }}>
                   {t.contact.form.emailLbl}
                 </label>
-                <input
-                  type="email"
-                  placeholder={t.contact.form.emailPlaceholder}
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className={inputClass}
-                  style={inputStyle}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                  dir="ltr"
+                <input type="email" placeholder={t.contact.form.emailPlaceholder}
+                  value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className={baseInput} style={baseInputStyle} dir="ltr"
+                  onFocus={(e) => focusInput(e.currentTarget)}
+                  onBlur={(e) => blurInput(e.currentTarget)}
                 />
               </div>
+
               <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-dark)" }}>
+                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-heading)" }}>
                   {t.contact.form.companyLbl}
                 </label>
-                <input
-                  type="text"
-                  placeholder={t.contact.form.companyPlaceholder}
-                  value={form.company}
-                  onChange={(e) => setForm({ ...form, company: e.target.value })}
-                  className={inputClass}
-                  style={inputStyle}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
+                <input type="text" placeholder={t.contact.form.companyPlaceholder}
+                  value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })}
+                  className={baseInput} style={baseInputStyle}
+                  onFocus={(e) => focusInput(e.currentTarget)}
+                  onBlur={(e) => blurInput(e.currentTarget)}
                 />
               </div>
+
               <div className="sm:col-span-2">
-                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-dark)" }}>
+                <label className="block text-sm font-semibold mb-2" style={{ color: "var(--text-heading)" }}>
                   {t.contact.form.messageLbl} <span style={{ color: "var(--primary)" }}>*</span>
                 </label>
-                <textarea
-                  required
-                  rows={4}
-                  placeholder={t.contact.form.messagePlaceholder}
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className={`${inputClass} resize-none`}
-                  style={inputStyle}
-                  onFocus={onFocus as unknown as React.FocusEventHandler<HTMLTextAreaElement>}
-                  onBlur={onBlur as unknown as React.FocusEventHandler<HTMLTextAreaElement>}
+                <textarea required rows={4} placeholder={t.contact.form.messagePlaceholder}
+                  value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className={`${baseInput} resize-none`} style={baseInputStyle}
+                  onFocus={(e) => focusInput(e.currentTarget)}
+                  onBlur={(e) => blurInput(e.currentTarget)}
                 />
               </div>
             </div>
@@ -218,7 +189,7 @@ export function Contact({ t, lang }: { t: T; lang: string }) {
             <button
               type="submit"
               className="mt-6 w-full flex items-center justify-center gap-2 px-8 py-4 text-white font-bold rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-base"
-              style={{ backgroundColor: "var(--primary)" }}
+              style={{ backgroundColor: "var(--primary)", boxShadow: "0 4px 18px rgba(0,168,200,0.25)" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}
             >
@@ -228,10 +199,9 @@ export function Contact({ t, lang }: { t: T; lang: string }) {
               {t.contact.form.submit}
             </button>
           </form>
+
         </div>
       </div>
     </SectionWrapper>
   );
 }
-
-
