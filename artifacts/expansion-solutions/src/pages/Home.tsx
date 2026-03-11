@@ -9,7 +9,6 @@ import { Clients } from "@/components/Clients";
 import { Closing } from "@/components/Closing";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
-import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
 export default function Home() {
   const { lang, toggleLang, t } = useLanguage();
@@ -26,7 +25,6 @@ export default function Home() {
       <Closing t={t} />
       <Contact t={t} lang={lang} />
       <Footer t={t} />
-      <FloatingWhatsApp />
     </div>
   );
 }

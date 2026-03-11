@@ -6,6 +6,7 @@ export const content = {
     lang: "ar",
     companyName: "حلول التوسع لتقنية المعلومات",
     companyNameEn: "Expansion Solutions Information Technology",
+    tagline: "شريكك التقني الموثوق",
     nav: {
       about: "من نحن",
       vision: "الرؤية",
@@ -73,7 +74,7 @@ export const content = {
           icon: "🗄️",
           title: "خدمات تخزين ونقل البيانات",
           points: [
-            "نقدم حلولاً متكاملة وآمنة لتخزين البيانات ونقلها باستخدام تقنيات متطورة.",
+            "نقدم حلولًا متكاملة وآمنة لتخزين البيانات ونقلها باستخدام تقنيات متطورة.",
             "تضمن خدماتنا كفاءة وموثوقية عالية لتأمين وحماية بيانات العملاء.",
           ],
         },
@@ -138,13 +139,15 @@ export const content = {
       subtitle: "نحن هنا لمساعدتك. تواصل معنا اليوم.",
       phone: "الهاتف",
       email: "البريد الإلكتروني",
+      whatsappBtn: "إرسال عبر واتساب",
+      emailSubject: "طلب تواصل من الموقع",
       form: {
-        name: "الاسم",
-        mobile: "رقم الجوال",
-        email: "البريد الإلكتروني",
-        company: "اسم الشركة",
-        message: "الرسالة",
-        submit: "إرسال عبر واتساب",
+        nameLbl: "الاسم",
+        mobileLbl: "رقم الجوال",
+        emailLbl: "البريد الإلكتروني",
+        companyLbl: "اسم الشركة",
+        messageLbl: "الرسالة",
+        submit: "إرسال الرسالة",
         namePlaceholder: "أدخل اسمك الكريم",
         mobilePlaceholder: "05xxxxxxxx",
         emailPlaceholder: "example@email.com",
@@ -153,7 +156,9 @@ export const content = {
       },
     },
     footer: {
+      quickLinks: "روابط سريعة",
       rights: "جميع الحقوق محفوظة",
+      copy: "© {year} حلول التوسع لتقنية المعلومات.",
       whatsapp: "واتساب",
     },
   },
@@ -162,6 +167,7 @@ export const content = {
     lang: "en",
     companyName: "Expansion Solutions Information Technology",
     companyNameEn: "حلول التوسع لتقنية المعلومات",
+    tagline: "Your Trusted Technology Partner",
     nav: {
       about: "About Us",
       vision: "Vision",
@@ -294,13 +300,15 @@ export const content = {
       subtitle: "We are here to help. Reach out to us today.",
       phone: "Phone",
       email: "Email",
+      whatsappBtn: "Send via WhatsApp",
+      emailSubject: "Website Contact Request",
       form: {
-        name: "Name",
-        mobile: "Mobile Number",
-        email: "Email",
-        company: "Company Name",
-        message: "Message",
-        submit: "Send via WhatsApp",
+        nameLbl: "Name",
+        mobileLbl: "Mobile Number",
+        emailLbl: "Email",
+        companyLbl: "Company Name",
+        messageLbl: "Message",
+        submit: "Send Message",
         namePlaceholder: "Enter your name",
         mobilePlaceholder: "+966xxxxxxxxx",
         emailPlaceholder: "example@email.com",
@@ -309,13 +317,15 @@ export const content = {
       },
     },
     footer: {
+      quickLinks: "Quick Links",
       rights: "All Rights Reserved",
+      copy: "© {year} Expansion Solutions Information Technology.",
       whatsapp: "WhatsApp",
     },
   },
 };
 
-export const WHATSAPP_NUMBER = "966535158997";
+export const WHATSAPP_NUMBER = "966500800785";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
-export const PHONE = "+966535158997";
+export const PHONE = "+966500800785";
 export const EMAIL = "info@expantionsolution.com";

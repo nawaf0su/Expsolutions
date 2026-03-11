@@ -14,52 +14,70 @@ export function Hero({ t }: { t: T }) {
   useEffect(() => {
     const shapes = shapesRef.current?.querySelectorAll(".geo-shape");
     if (!shapes) return;
+    let rafId: number;
     const animate = () => {
       shapes.forEach((shape, i) => {
         const el = shape as HTMLElement;
         const t2 = Date.now() / 1000;
-        const speed = 0.3 + i * 0.1;
-        const amp = 8 + i * 3;
-        el.style.transform = `translateY(${Math.sin(t2 * speed) * amp}px) rotate(${Math.cos(t2 * speed * 0.7) * 5}deg)`;
+        const speed = 0.25 + i * 0.08;
+        const amp = 7 + i * 2.5;
+        el.style.transform = `translateY(${Math.sin(t2 * speed) * amp}px) rotate(${Math.cos(t2 * speed * 0.7) * 4}deg)`;
       });
-      requestAnimationFrame(animate);
+      rafId = requestAnimationFrame(animate);
     };
-    const id = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(id);
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-brand-navy"
+      className="relative min-h-screen flex items-center overflow-hidden"
+      style={{ backgroundColor: "var(--secondary)" }}
     >
       {/* Background geometric shapes */}
       <div ref={shapesRef} className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="geo-shape absolute top-[15%] right-[8%] w-64 h-64 rounded-full border-2 border-brand-teal/20 opacity-40" />
-        <div className="geo-shape absolute top-[30%] left-[5%] w-40 h-40 rounded-2xl border border-brand-teal/15 opacity-30 rotate-12" />
-        <div className="geo-shape absolute bottom-[20%] right-[15%] w-32 h-32 rounded-full bg-brand-teal/5 border border-brand-teal/20" />
-        <div className="geo-shape absolute top-[60%] left-[10%] w-24 h-24 border-2 border-brand-teal/10 rotate-45" />
-        <div className="geo-shape absolute top-[10%] left-[30%] w-16 h-16 rounded-full bg-brand-teal/8 border border-brand-teal/20" />
+        <div className="geo-shape absolute top-[12%] right-[6%] w-72 h-72 rounded-full"
+          style={{ border: "2px solid rgba(0,168,200,0.15)" }} />
+        <div className="geo-shape absolute top-[35%] left-[4%] w-44 h-44 rounded-2xl rotate-12"
+          style={{ border: "1px solid rgba(46,208,232,0.12)" }} />
+        <div className="geo-shape absolute bottom-[18%] right-[12%] w-36 h-36 rounded-full"
+          style={{ backgroundColor: "rgba(0,168,200,0.04)", border: "1px solid rgba(0,168,200,0.15)" }} />
+        <div className="geo-shape absolute top-[58%] left-[8%] w-28 h-28 rotate-45"
+          style={{ border: "2px solid rgba(46,208,232,0.08)" }} />
+        <div className="geo-shape absolute top-[8%] left-[28%] w-16 h-16 rounded-full"
+          style={{ backgroundColor: "rgba(46,208,232,0.06)", border: "1px solid rgba(46,208,232,0.15)" }} />
         {/* Grid pattern overlay */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0"
           style={{
+            opacity: 0.03,
             backgroundImage:
-              "linear-gradient(rgba(45,212,191,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(45,212,191,0.5) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
+              "linear-gradient(rgba(0,168,200,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(0,168,200,0.8) 1px, transparent 1px)",
+            backgroundSize: "55px 55px",
           }}
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/0 via-brand-navy/20 to-brand-navy" />
+        {/* Radial gradient glow */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(ellipse, rgba(0,168,200,0.08) 0%, transparent 70%)" }}
+        />
       </div>
-
-      {/* Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand-teal/5 blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-teal/30 bg-brand-teal/10 text-brand-teal-light text-sm font-medium mb-8 animate-fade-in">
-          <span className="w-2 h-2 rounded-full bg-brand-teal animate-pulse" />
+        <div
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-8 animate-fade-in"
+          style={{
+            border: "1px solid rgba(0,168,200,0.35)",
+            backgroundColor: "rgba(0,168,200,0.08)",
+            color: "var(--accent)",
+          }}
+        >
+          <span
+            className="w-2 h-2 rounded-full animate-pulse"
+            style={{ backgroundColor: "var(--primary)" }}
+          />
           {t.companyName}
         </div>
 
@@ -69,7 +87,10 @@ export function Hero({ t }: { t: T }) {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed animate-slide-up-delay">
+        <p
+          className="text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed animate-slide-up-delay"
+          style={{ color: "rgba(255,255,255,0.7)" }}
+        >
           {t.hero.subheadline}
         </p>
 
@@ -77,7 +98,10 @@ export function Hero({ t }: { t: T }) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up-delay-2">
           <button
             onClick={scrollToContact}
-            className="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-brand-teal/30 hover:shadow-xl hover:-translate-y-0.5"
+            className="w-full sm:w-auto px-8 py-3.5 text-white font-semibold rounded-lg transition-all duration-200 hover:-translate-y-0.5"
+            style={{ backgroundColor: "var(--primary)" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}
           >
             {t.hero.cta1}
           </button>
@@ -85,7 +109,20 @@ export function Hero({ t }: { t: T }) {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-3.5 border-2 border-brand-teal/50 text-brand-teal-light hover:border-brand-teal hover:bg-brand-teal/10 font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2 hover:-translate-y-0.5"
+            className="w-full sm:w-auto px-8 py-3.5 font-semibold rounded-lg transition-all duration-200 flex items-center justify-center gap-2 hover:-translate-y-0.5"
+            style={{
+              border: "2px solid rgba(0,168,200,0.5)",
+              color: "var(--accent)",
+              backgroundColor: "transparent",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = "var(--primary)";
+              (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(0,168,200,0.1)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,168,200,0.5)";
+              (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
+            }}
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -96,9 +133,9 @@ export function Hero({ t }: { t: T }) {
 
         {/* Scroll indicator */}
         <div className="mt-20 flex justify-center">
-          <div className="flex flex-col items-center gap-2 text-gray-500 animate-bounce-slow">
-            <div className="w-6 h-10 rounded-full border-2 border-gray-600 flex justify-center pt-2">
-              <div className="w-1.5 h-3 bg-brand-teal rounded-full animate-scroll-down" />
+          <div className="flex flex-col items-center gap-2 animate-bounce-slow" style={{ color: "rgba(255,255,255,0.3)" }}>
+            <div className="w-6 h-10 rounded-full flex justify-center pt-2" style={{ border: "2px solid rgba(255,255,255,0.2)" }}>
+              <div className="w-1.5 h-3 rounded-full animate-scroll-down" style={{ backgroundColor: "var(--primary)" }} />
             </div>
           </div>
         </div>

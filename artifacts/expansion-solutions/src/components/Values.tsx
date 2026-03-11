@@ -8,35 +8,42 @@ export function Values({ t }: { t: T }) {
     <SectionWrapper id="values" className="bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <span className="inline-block text-brand-teal text-sm font-semibold tracking-widest uppercase mb-3">
+          <span className="inline-block text-sm font-semibold tracking-widest uppercase mb-3" style={{ color: "var(--primary)" }}>
             {t.values.title}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy">{t.values.title}</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-brand-teal to-brand-teal-dark rounded-full mx-auto mt-4" />
+          <h2 className="text-3xl sm:text-4xl font-bold" style={{ color: "var(--secondary)" }}>{t.values.title}</h2>
+          <div className="w-16 h-1 rounded-full mx-auto mt-4" style={{ background: "linear-gradient(to right, var(--primary), var(--accent))" }} />
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {t.values.items.map((item, i) => (
             <div
               key={i}
-              className="group relative bg-white border border-gray-100 rounded-2xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+              className="group relative bg-white rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+              style={{ border: "1px solid var(--border-light)", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 32px rgba(0,168,200,0.12)";
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,168,200,0.25)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.05)";
+                (e.currentTarget as HTMLElement).style.borderColor = "var(--border-light)";
+              }}
             >
-              {/* Hover background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-teal/0 to-brand-teal/5 group-hover:from-brand-teal/5 group-hover:to-brand-teal/10 transition-all duration-300 rounded-2xl" />
+              {/* Top accent line on hover */}
+              <div
+                className="absolute top-0 start-0 end-0 h-0.5 rounded-t-2xl scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-start"
+                style={{ background: "linear-gradient(to right, var(--primary), var(--accent))" }}
+              />
 
-              {/* Top accent line */}
-              <div className="absolute top-0 start-0 end-0 h-1 bg-gradient-to-r from-brand-teal to-brand-teal-dark rounded-t-2xl scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-start" />
-
-              <div className="relative z-10">
-                <div className="w-14 h-14 rounded-2xl bg-brand-teal/10 group-hover:bg-brand-teal/20 flex items-center justify-center text-2xl mb-5 transition-colors duration-300">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-bold text-brand-navy mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed text-sm">{item.desc}</p>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5 transition-all duration-300" style={{ backgroundColor: "rgba(0,168,200,0.08)" }}>
+                {item.icon}
               </div>
+              <h3 className="text-xl font-bold mb-3" style={{ color: "var(--secondary)" }}>{item.title}</h3>
+              <p className="leading-relaxed text-sm" style={{ color: "var(--text-muted)" }}>{item.desc}</p>
 
               {/* Number watermark */}
-              <div className="absolute bottom-3 end-5 text-7xl font-black text-gray-50 select-none leading-none">
+              <div className="absolute bottom-2 end-4 text-7xl font-black leading-none select-none" style={{ color: "rgba(0,0,0,0.03)" }}>
                 {i + 1}
               </div>
             </div>

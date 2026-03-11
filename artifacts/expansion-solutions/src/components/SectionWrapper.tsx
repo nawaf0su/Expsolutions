@@ -1,12 +1,13 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode, type CSSProperties } from "react";
 
 interface SectionWrapperProps {
-  id: string;
+  id?: string;
   className?: string;
+  style?: CSSProperties;
   children: ReactNode;
 }
 
-export function SectionWrapper({ id, className = "", children }: SectionWrapperProps) {
+export function SectionWrapper({ id, className = "", style, children }: SectionWrapperProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export function SectionWrapper({ id, className = "", children }: SectionWrapperP
           el.classList.add("section-visible");
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
 
     observer.observe(el);
@@ -31,6 +32,7 @@ export function SectionWrapper({ id, className = "", children }: SectionWrapperP
       id={id}
       ref={ref}
       className={`section-animate py-20 lg:py-28 ${className}`}
+      style={style}
     >
       {children}
     </section>
