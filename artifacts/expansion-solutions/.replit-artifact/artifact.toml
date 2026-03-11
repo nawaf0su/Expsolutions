@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Expansion Solutions IT - Corporate Website"
+version = "1.0.0"
+id = "artifacts/expansion-solutions"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+localPort = 21856
+name = "web"
+paths = ["/"]
+
+[services.development]
+run = "pnpm --filter @workspace/expansion-solutions run dev"
+
+[services.env]
+PORT = "21856"
+BASE_PATH = "/"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/expansion-solutions", "run", "build"]
+publicDir = "artifacts/expansion-solutions/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"

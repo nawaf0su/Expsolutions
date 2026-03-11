@@ -1,0 +1,253 @@
+Build me a premium corporate ONE-PAGE bilingual website for a technology company.
+
+IMPORTANT LANGUAGE RULE:
+- The website MUST load in Arabic by default.
+- Arabic is the primary/main language.
+- English is the secondary language.
+- The first experience for all visitors must be Arabic.
+- The page direction in Arabic must be RTL.
+- Add a language switcher in the header to toggle between Arabic and English.
+- Arabic content should be shown on first load automatically.
+- English should only appear when the user switches manually.
+
+CRITICAL CONTENT RULES:
+- Do NOT add any information, sections, claims, projects, achievements, years, numbers, clients, testimonials, team members, branches, addresses, social proof, or service details that are not explicitly provided below.
+- Do NOT make up content to “fill” the design.
+- Use only the exact company information and text provided in this prompt.
+- You may translate the provided Arabic content into professional English for the English version, but do not expand or invent new meaning.
+- Keep the website one page only.
+- The website should look premium, modern, corporate, and custom designed.
+
+COMPANY NAME:
+Arabic: حلول التوسع لتقنية المعلومات
+English: Expansion Solutions Information Technology
+
+WEBSITE GOAL:
+Create a single-page corporate profile website (ملف تعريفي بالشركة) that presents the company professionally and encourages visitors to contact the company.
+
+DESIGN DIRECTION:
+- Premium corporate style
+- Modern and elegant
+- Clean section spacing
+- Professional card-based layouts where suitable
+- Subtle animations only
+- Strong typography
+- Trustworthy business appearance
+- Responsive on desktop, tablet, and mobile
+- Smooth scrolling
+- Sticky header
+- Use CSS variables for brand colors
+- Brand colors should follow the PDF / company visual identity as closely as possible
+- Do not use random colors that break brand consistency
+- Use a primary teal/cyan tone, dark/navy secondary tone, white/light backgrounds, and dark text where suitable
+- Visual feel should be similar to a formal company profile turned into a website
+
+TECH REQUIREMENTS:
+- Use plain HTML, CSS, and JavaScript only
+- No frameworks
+- No fake backend
+- Files required:
+  1. index.html
+  2. style.css
+  3. script.js
+- Code must be clean and organized
+- Use semantic HTML
+- Must be ready to run immediately
+
+HEADER / NAVBAR:
+Create a sticky top header with:
+- Company logo area
+- Navigation menu
+- Language switcher (AR / EN)
+- WhatsApp CTA button
+- Arabic layout first
+- Add a comment showing exactly where I should replace the placeholder logo with the real logo
+
+Example:
+<!-- Replace this placeholder with the official company logo -->
+<img src="logo-placeholder.png" alt="حلول التوسع لتقنية المعلومات">
+
+WHATSAPP:
+Add:
+1. WhatsApp button in the navbar
+2. Floating WhatsApp button
+Both should redirect to:
+https://wa.me/966535158997
+
+CONTACT DETAILS:
+Phone: +966535158997
+Email: info@expantionsolution.com
+
+CONTACT FORM:
+At the bottom of the page add a contact form with:
+- الاسم / Name
+- رقم الجوال / Mobile Number
+- البريد الإلكتروني / Email
+- اسم الشركة / Company Name
+- الرسالة / Message
+
+Since there is no backend, the form should redirect to WhatsApp with a prefilled message using JavaScript.
+
+WhatsApp number:
+https://wa.me/966535158997
+
+Use a prefilled message format like this in Arabic:
+الاسم: [name]
+رقم الجوال: [phone]
+البريد الإلكتروني: [email]
+اسم الشركة: [company]
+الرسالة: [message]
+
+SECTIONS TO BUILD:
+Build the website as one page with these sections in this order:
+
+1. Hero Section
+2. من نحن / About Us
+3. الرؤية / Vision
+4. رسالتنا / Mission
+5. قيمنا / Our Values
+6. خدماتنا / Our Services
+7. عملاؤنا الرئيسيون / Our Main Clients
+8. ختاماً / Closing Section
+9. Contact Section
+10. Footer
+
+ARABIC CONTENT TO USE EXACTLY:
+
+1. من نحن:
+نحن شركة متخصصة في تقديم حلول تقنية مبتكرة وشاملة، تهدف إلى دعم الأفراد والشركات من خلال خدمات متكاملة تجمع بين الجودة، الابتكار، والتكنولوجيا الحديثة. نسعى إلى تمكين عملائنا من تحقيق أهدافهم بفعالية واستدامة من خلال توفير خدمات وحلول تقنية متميزة مصممة خصيصاً لتلبية احتياجاتهم.
+
+2. الرؤية:
+أن نصبح الشريك التقني الرائد في تقديم الحلول الرقمية المبتكرة، وأن نكون الخيار الأول للشركات والأفراد الذين يتطلعون إلى تطوير أعمالهم باستخدام أحدث تقنيات التكنولوجيا.
+
+3. رسالتنا:
+نلتزم بتقديم خدمات تقنية عالية الجودة وحلول متطورة تساعد عملاءنا على تحسين أدائهم، وتبني الابتكار، وتعزيز تنافسيتهم في السوق.
+
+4. قيمنا:
+- الابتكار: نؤمن بالإبداع وتقديم أفكار جديدة لتحسين حلولنا وخدماتنا.
+- الجودة: نلتزم بتقديم خدمات ذات معايير عالمية تضمن رضا العملاء.
+- المرونة: نعمل على تكييف حلولنا لتناسب احتياجات وتوقعات عملائنا.
+- النزاهة: نلتزم بالشفافية والاحترافية في جميع تعاملاتنا.
+- الشراكة: نؤمن ببناء علاقات طويلة الأمد مع عملائنا لتحقيق أهداف مشتركة.
+
+5. خدماتنا:
+
+أ. خدمات تخزين ونقل البيانات:
+- نقدم حلولًا متكاملة وآمنة لتخزين البيانات ونقلها باستخدام تقنيات متطورة.
+- تضمن خدماتنا كفاءة وموثوقية عالية لتأمين وحماية بيانات العملاء.
+
+ب. تطوير وبرمجة التطبيقات:
+- تصميم وإنشاء تطبيقات برمجية مبتكرة تلبي احتياجات العملاء المتنوعة.
+- تطوير تطبيقات اتصالات وحلول برمجية متكاملة لتحسين العمليات اليومية.
+
+ج. خدمات تطوير التطبيقات والمواقع الإلكترونية:
+- تصميم وتطوير مواقع إلكترونية متوافقة مع أحدث المعايير لتقديم تجربة استخدام متميزة.
+- بناء تطبيقات مخصصة على منصات متعددة تركز على تعزيز الكفاءة وتحسين تجربة المستخدم.
+
+د. تقديم الحلول الخاصة بالذكاء الاصطناعي:
+- تطوير أنظمة ذكية تعتمد على تقنيات التعلم الآلي لتحليل البيانات واتخاذ القرارات.
+- تصميم حلول ذكاء اصطناعي مبتكرة لتحسين العمليات التشغيلية وزيادة الإنتاجية.
+
+6. عملاؤنا الرئيسيون:
+- الشركات الصغيرة والمتوسطة التي تسعى لتطوير حضورها الرقمي وتحسين كفاءتها التشغيلية.
+- المؤسسات الكبرى التي تحتاج إلى حلول تقنية متقدمة تلبي متطلباتها التشغيلية.
+- الهيئات الحكومية التي تهدف إلى رقمنة خدماتها وتحسين كفاءتها الإدارية.
+- الشركات الناشئة التي تبحث عن شريك تقني موثوق لدعم رحلتها في سوق المنافسة.
+
+7. ختاماً:
+نحن في شركتنا نؤمن بأن التكنولوجيا هي أداة أساسية لتحقيق النجاح. لذلك، نسعى باستمرار لتقديم حلول تقنية متطورة تلبي تطلعات عملائنا وتساعدهم على تحقيق الريادة في مجالاتهم.
+
+ENGLISH VERSION REQUIREMENT:
+Create a professional English translation of the exact same content above.
+Do not add any extra meaning.
+Do not invent extra details.
+The English content should mirror the Arabic sections exactly.
+
+HERO SECTION REQUIREMENTS:
+- Show the company name prominently in Arabic
+- Show the English name as secondary text
+- Include a short introductory headline based only on the provided content
+- Add 2 CTA buttons:
+  1. تواصل معنا / Contact Us → scroll to contact form
+  2. واتساب / WhatsApp → open WhatsApp link
+- Add a premium corporate visual treatment in the background
+- Do not use stock photos unless absolutely necessary
+- Prefer abstract geometric / modern business styling
+
+VALUES SECTION:
+- Display the 5 values in elegant cards
+- Each card should include the value title and description
+- Arabic-first design
+- English version should switch properly
+
+SERVICES SECTION:
+- Display the 4 service categories in premium cards or blocks
+- Each service should include its title and bullet points
+- Keep layout clean and readable
+- No extra services
+
+CLIENTS SECTION:
+- Present the listed client categories clearly and professionally
+- Do not add logos of companies
+- Do not invent company names
+
+CONTACT SECTION:
+Include:
+- Contact info cards for phone and email
+- Contact form that redirects to WhatsApp
+- Strong call to action encouraging visitors to reach out
+
+FOOTER:
+Include only:
+- Company name
+- Phone number
+- Email
+- WhatsApp shortcut
+- Copyright line with company name
+
+UX / UI DETAILS:
+- Arabic should feel natural and elegant in RTL
+- English should switch to LTR when toggled
+- Navigation should update labels based on selected language
+- Use subtle hover effects
+- Use smooth reveal animation on scroll
+- Use section containers with premium spacing
+- Make the mobile version very polished
+- Keep header compact and professional
+- Add active nav highlighting while scrolling if possible
+
+DO NOT ADD:
+- No “our journey” timeline
+- No fake portfolio
+- No fake project count
+- No fake stats
+- No testimonials
+- No team section
+- No blog
+- No careers
+- No map unless there is a real address
+- No made-up slogans beyond the provided content
+- No fake social media links
+
+DELIVERABLE FORMAT:
+Return the complete code for:
+1. index.html
+2. style.css
+3. script.js
+
+ALSO INCLUDE:
+- Clear comments showing where to replace the company logo
+- Clear comments showing where text content is stored
+- A structured bilingual content object in JavaScript or HTML data attributes so language switching is easy to manage
+- Clean code, not messy generated code
+
+FINAL QUALITY CHECK:
+Before finishing, verify:
+- Arabic is the default language on first load
+- English is secondary and toggleable
+- Website is one page only
+- No invented content was added
+- WhatsApp CTA works
+- Contact form redirects to WhatsApp
+- Design looks premium and corporate
+- Arabic RTL and English LTR both work correctly
