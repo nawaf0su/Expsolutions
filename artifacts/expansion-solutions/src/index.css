@@ -214,6 +214,27 @@
   animation: bounce 3s infinite;
 }
 
+/* Logo frame animated gradient border */
+@keyframes logo-border-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+.logo-border-animated {
+  background: linear-gradient(135deg, #00A8C8, #2ED0E8, #0090ae, #2ED0E8, #00A8C8);
+  background-size: 300% 300%;
+  animation: logo-border-flow 4s ease infinite;
+}
+
+@keyframes logo-corner-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+.logo-corner-accent {
+  animation: logo-corner-pulse 3s ease-in-out infinite;
+}
+
 .animate-scroll-down {
   animation: scrollDown 2s ease-in-out infinite;
 }

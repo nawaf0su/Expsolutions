@@ -13,28 +13,103 @@ export function Hero({ t }: { t: T }) {
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{
-        background: "linear-gradient(160deg, #0B2C3D 0%, #0d3447 55%, #0f3d53 100%)",
+        background:
+          "linear-gradient(160deg, #0B2C3D 0%, #0d3447 55%, #0f3d53 100%)",
       }}
     >
       {/* Subtle top-right radial glow only — no grid, no busy patterns */}
       <div
         className="absolute top-0 end-0 w-[600px] h-[600px] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at top right, rgba(0,168,200,0.10) 0%, transparent 65%)" }}
+        style={{
+          background:
+            "radial-gradient(ellipse at top right, rgba(0,168,200,0.10) 0%, transparent 65%)",
+        }}
       />
       <div
         className="absolute bottom-0 start-0 w-[400px] h-[400px] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at bottom left, rgba(46,208,232,0.06) 0%, transparent 65%)" }}
+        style={{
+          background:
+            "radial-gradient(ellipse at bottom left, rgba(46,208,232,0.06) 0%, transparent 65%)",
+        }}
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-        {/* Logo */}
-        <div className="flex justify-center mb-8 animate-fade-in">
-          <img
-            src="/logo.png"
-            alt={t.companyName}
-            className="w-auto object-contain"
-            style={{ height: "180px", maxWidth: "420px", mixBlendMode: "screen" }}
-          />
+        {/* Logo with premium animated frame */}
+        <div className="flex justify-center mb-10 animate-fade-in">
+          <div className="relative inline-block">
+
+            {/* Outer ambient glow */}
+            <div style={{
+              position: "absolute",
+              inset: "-20px",
+              borderRadius: "28px",
+              background: "radial-gradient(ellipse at center, rgba(0,168,200,0.18) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }} />
+
+            {/* Animated gradient border ring */}
+            <div
+              className="logo-border-animated"
+              style={{
+                padding: "2px",
+                borderRadius: "22px",
+                boxShadow:
+                  "0 0 30px rgba(0,168,200,0.35), 0 0 60px rgba(46,208,232,0.15), 0 8px 40px rgba(0,0,0,0.4)",
+              }}
+            >
+              {/* Inner frosted container */}
+              <div style={{
+                borderRadius: "20px",
+                background: "linear-gradient(145deg, rgba(8,32,46,0.82) 0%, rgba(11,44,61,0.92) 100%)",
+                backdropFilter: "blur(18px)",
+                padding: "12px 20px",
+              }}>
+                <img
+                  src="/logo.png"
+                  alt={t.companyName}
+                  className="w-auto object-contain block"
+                  style={{ height: "200px", maxWidth: "440px", mixBlendMode: "screen" }}
+                />
+              </div>
+            </div>
+
+            {/* Corner accent — top-left */}
+            <div className="logo-corner-accent" style={{
+              position: "absolute", top: -8, left: -8,
+              width: 28, height: 28,
+              borderTop: "2.5px solid var(--accent)",
+              borderLeft: "2.5px solid var(--accent)",
+              borderRadius: "6px 0 0 0",
+            }} />
+            {/* Corner accent — top-right */}
+            <div className="logo-corner-accent" style={{
+              position: "absolute", top: -8, right: -8,
+              width: 28, height: 28,
+              borderTop: "2.5px solid var(--accent)",
+              borderRight: "2.5px solid var(--accent)",
+              borderRadius: "0 6px 0 0",
+              animationDelay: "0.75s",
+            }} />
+            {/* Corner accent — bottom-left */}
+            <div className="logo-corner-accent" style={{
+              position: "absolute", bottom: -8, left: -8,
+              width: 28, height: 28,
+              borderBottom: "2.5px solid var(--accent)",
+              borderLeft: "2.5px solid var(--accent)",
+              borderRadius: "0 0 0 6px",
+              animationDelay: "1.5s",
+            }} />
+            {/* Corner accent — bottom-right */}
+            <div className="logo-corner-accent" style={{
+              position: "absolute", bottom: -8, right: -8,
+              width: 28, height: 28,
+              borderBottom: "2.5px solid var(--accent)",
+              borderRight: "2.5px solid var(--accent)",
+              borderRadius: "0 0 6px 0",
+              animationDelay: "2.25s",
+            }} />
+
+          </div>
         </div>
 
         {/* Headline */}
@@ -45,9 +120,15 @@ export function Hero({ t }: { t: T }) {
         {/* Sub-headline — inside a frosted container for clean readability */}
         <div
           className="max-w-2xl mx-auto mb-10 animate-slide-up-delay rounded-xl px-6 py-4"
-          style={{ backgroundColor: "rgba(255,255,255,0.05)", backdropFilter: "blur(4px)" }}
+          style={{
+            backgroundColor: "rgba(255,255,255,0.05)",
+            backdropFilter: "blur(4px)",
+          }}
         >
-          <p className="text-base sm:text-lg" style={{ color: "rgba(255,255,255,0.82)", lineHeight: "1.8" }}>
+          <p
+            className="text-base sm:text-lg"
+            style={{ color: "rgba(255,255,255,0.82)", lineHeight: "1.8" }}
+          >
             {t.hero.subheadline}
           </p>
         </div>
@@ -57,9 +138,18 @@ export function Hero({ t }: { t: T }) {
           <button
             onClick={scrollToContact}
             className="w-full sm:w-auto px-9 py-3.5 text-white font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-base"
-            style={{ backgroundColor: "var(--primary)", boxShadow: "0 4px 18px rgba(0,168,200,0.30)" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}
+            style={{
+              backgroundColor: "var(--primary)",
+              boxShadow: "0 4px 18px rgba(0,168,200,0.30)",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor =
+                "var(--primary-dark)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor =
+                "var(--primary)";
+            }}
           >
             {t.hero.cta1}
           </button>
@@ -74,12 +164,16 @@ export function Hero({ t }: { t: T }) {
               backgroundColor: "transparent",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "var(--primary)";
-              (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(0,168,200,0.10)";
+              (e.currentTarget as HTMLElement).style.borderColor =
+                "var(--primary)";
+              (e.currentTarget as HTMLElement).style.backgroundColor =
+                "rgba(0,168,200,0.10)";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,168,200,0.45)";
-              (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
+              (e.currentTarget as HTMLElement).style.borderColor =
+                "rgba(0,168,200,0.45)";
+              (e.currentTarget as HTMLElement).style.backgroundColor =
+                "transparent";
             }}
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -91,9 +185,18 @@ export function Hero({ t }: { t: T }) {
 
         {/* Scroll indicator */}
         <div className="mt-20 flex justify-center">
-          <div className="flex flex-col items-center gap-2 animate-bounce-slow" style={{ color: "rgba(255,255,255,0.25)" }}>
-            <div className="w-6 h-10 rounded-full flex justify-center pt-2" style={{ border: "2px solid rgba(255,255,255,0.18)" }}>
-              <div className="w-1.5 h-3 rounded-full animate-scroll-down" style={{ backgroundColor: "var(--primary)" }} />
+          <div
+            className="flex flex-col items-center gap-2 animate-bounce-slow"
+            style={{ color: "rgba(255,255,255,0.25)" }}
+          >
+            <div
+              className="w-6 h-10 rounded-full flex justify-center pt-2"
+              style={{ border: "2px solid rgba(255,255,255,0.18)" }}
+            >
+              <div
+                className="w-1.5 h-3 rounded-full animate-scroll-down"
+                style={{ backgroundColor: "var(--primary)" }}
+              />
             </div>
           </div>
         </div>
