@@ -62,26 +62,14 @@ export function Navbar({ t, lang, onToggleLang }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-[70px]">
 
-          {/* Logo area */}
-          <div className="flex items-center gap-3 shrink-0">
-            {/* Replace this placeholder with the official company logo */}
-            {/* <img src="logo.png" alt={t.companyName} className="h-10 w-auto" /> */}
-            <div className="flex items-center gap-2.5">
-              <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center shadow-md font-bold text-white text-sm"
-                style={{ background: "linear-gradient(135deg, var(--primary), var(--accent))" }}
-              >
-                حت
-              </div>
-              <div className="hidden sm:block leading-tight">
-                <p className="text-white font-bold text-sm">
-                  {lang === "ar" ? "حلول التوسع" : "Expansion Solutions"}
-                </p>
-                <p className="text-xs opacity-60" style={{ color: "var(--accent)" }}>
-                  {lang === "ar" ? "لتقنية المعلومات" : "Information Technology"}
-                </p>
-              </div>
-            </div>
+          {/* Logo */}
+          <div className="flex items-center shrink-0">
+            <img
+              src="/logo.png"
+              alt={t.companyName}
+              className="h-10 w-auto object-contain"
+              style={{ maxWidth: "160px" }}
+            />
           </div>
 
           {/* Desktop Nav */}

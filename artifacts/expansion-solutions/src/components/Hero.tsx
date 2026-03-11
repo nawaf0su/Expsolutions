@@ -27,20 +27,14 @@ export function Hero({ t }: { t: T }) {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-        {/* Badge */}
-        <div
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-8 animate-fade-in"
-          style={{
-            border: "1px solid rgba(0,168,200,0.35)",
-            backgroundColor: "rgba(0,168,200,0.10)",
-            color: "var(--accent)",
-          }}
-        >
-          <span
-            className="w-2 h-2 rounded-full animate-pulse"
-            style={{ backgroundColor: "var(--primary)" }}
+        {/* Logo */}
+        <div className="flex justify-center mb-8 animate-fade-in">
+          <img
+            src="/logo.png"
+            alt={t.companyName}
+            className="h-20 w-auto object-contain"
+            style={{ maxWidth: "260px", filter: "brightness(0) invert(1)" }}
           />
-          {t.companyName}
         </div>
 
         {/* Headline */}

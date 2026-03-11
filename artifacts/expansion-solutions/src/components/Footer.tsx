@@ -16,17 +16,13 @@ export function Footer({ t }: { t: T }) {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-10" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-5">
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white text-sm shadow-lg"
-                style={{ background: "linear-gradient(135deg, var(--primary), var(--accent))" }}
-              >
-                حت
-              </div>
-              <div>
-                <p className="text-white font-bold">{t.companyName}</p>
-                <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{t.tagline}</p>
-              </div>
+            <div className="mb-5">
+              <img
+                src="/logo.png"
+                alt={t.companyName}
+                className="h-12 w-auto object-contain"
+                style={{ maxWidth: "180px", filter: "brightness(0) invert(1)", opacity: 0.9 }}
+              />
             </div>
             <p className="text-sm leading-relaxed max-w-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
               {t.about.body.substring(0, 150)}...
