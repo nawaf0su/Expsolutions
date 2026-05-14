@@ -1,0 +1,9 @@
+{
+  "buildCommand": "cd artifacts/expansion-solutions && pnpm exec vite build --config vite.config.ts",
+  "outputDirectory": "artifacts/expansion-solutions/dist/public",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "env": {
+    "BASE_PATH": "/"
+  }
+}
