@@ -1,0 +1,10 @@
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[33msrc/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.[39m
+[32m✓[39m 1775 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/public/[22m[32mindex.html                 [39m[1m[2m  0.70 kB[22m[1m[22m[2m │ gzip:   0.40 kB[22m
+[2mdist/public/[22m[35massets/index-MgO7cNui.css  [39m[1m[2m 96.86 kB[22m[1m[22m[2m │ gzip:  16.47 kB[22m
+[2mdist/public/[22m[36massets/index-X33vvl5S.js   [39m[1m[2m355.91 kB[22m[1m[22m[2m │ gzip: 107.12 kB[22m
+[32m✓ built in 4.22s[39m
