@@ -2,19 +2,38 @@ import { useState, type FormEvent, type CSSProperties } from "react";
 import type { content } from "@/content";
 import { WHATSAPP_URL, PHONE, EMAIL } from "@/content";
 import { SectionWrapper } from "@/components/SectionWrapper";
+import { sendEmail } from "@/lib/emailjs";
 
 type T = (typeof content)["ar"] | (typeof content)["en"];
 
 export function Contact({ t, lang }: { t: T; lang: string }) {
   const [form, setForm] = useState({ name: "", mobile: "", email: "", company: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(t.contact.emailSubject);
-    const body = lang === "ar"
+    setStatus("loading");
+
+    const subject = t.contact.emailSubject;
+    const message = lang === "ar"
       ? `الاسم: ${form.name}\nرقم الجوال: ${form.mobile}\nالبريد الإلكتروني: ${form.email}\nاسم الشركة: ${form.company}\nالرسالة: ${form.message}`
       : `Name: ${form.name}\nMobile: ${form.mobile}\nEmail: ${form.email}\nCompany: ${form.company}\nMessage: ${form.message}`;
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
+
+    const { ok } = await sendEmail({
+      subject,
+      message,
+      from_name: form.name,
+      reply_to: form.email,
+    });
+
+    if (ok) {
+      setStatus("success");
+      setForm({ name: "", mobile: "", email: "", company: "", message: "" });
+      setTimeout(() => setStatus("idle"), 5000);
+    } else {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   const focusInput = (el: HTMLInputElement | HTMLTextAreaElement) => {
@@ -149,14 +168,33 @@ export function Contact({ t, lang }: { t: T; lang: string }) {
               </div>
             </div>
             <button type="submit"
-              className="mt-6 w-full flex items-center justify-center gap-2 px-8 py-4 text-white font-bold rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-base"
-              style={{ backgroundColor: "var(--primary)", boxShadow: "0 4px 18px rgba(0,168,200,0.25)" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              {t.contact.form.submit}
+              disabled={status === "loading"}
+              className="mt-6 w-full flex items-center justify-center gap-2 px-8 py-4 text-white font-bold rounded-xl transition-all duration-200 hover:-translate-y-0.5 text-base disabled:opacity-70 disabled:cursor-not-allowed"
+              style={{ 
+                backgroundColor: status === "success" ? "#10b981" : status === "error" ? "#ef4444" : "var(--primary)", 
+                boxShadow: "0 4px 18px rgba(0,168,200,0.25)" 
+              }}
+              onMouseEnter={e => { if (status === "idle") (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
+              onMouseLeave={e => { if (status === "idle") (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}>
+              {status === "loading" ? (
+                <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : status === "success" ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              ) : status === "error" ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              )}
+              {status === "loading" ? (lang === "ar" ? "جاري الإرسال..." : "Sending...") : 
+               status === "success" ? (lang === "ar" ? "تم الإرسال بنجاح!" : "Sent Successfully!") :
+               status === "error" ? (lang === "ar" ? "فشل الإرسال، حاول لاحقاً" : "Failed to send, try again") :
+               t.contact.form.submit}
             </button>
           </form>
         </div>

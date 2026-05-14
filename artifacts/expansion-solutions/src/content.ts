@@ -398,4 +398,4 @@ export const content = {
 export const WHATSAPP_NUMBER = "966500800785";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 export const PHONE = "+966500800785";
-export const EMAIL = "info@expantionsolution.com";
+export const EMAIL = "info@expantionsolution.sa";

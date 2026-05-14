@@ -3,10 +3,12 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { EMAIL } from "@/content";
+import { sendEmail } from "@/lib/emailjs";
 
 export default function SubmitIdea() {
   const { lang, toggleLang, t } = useLanguage();
   const f = t.ideaForm;
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const [form, setForm] = useState({
     fullName: "", email: "", mobile: "", company: "",
@@ -17,63 +19,57 @@ export default function SubmitIdea() {
   const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(prev => ({ ...prev, [key]: e.target.value }));
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(f.emailSubject);
-    const body = lang === "ar"
-      ? [
-          `=== ${f.sectionA} ===`,
-          `${f.fields.fullName}: ${form.fullName}`,
-          `${f.fields.email}: ${form.email}`,
-          `${f.fields.mobile}: ${form.mobile}`,
-          `${f.fields.company}: ${form.company}`,
-          ``,
-          `=== ${f.sectionB} ===`,
-          `${f.fields.ideaName}: ${form.ideaName}`,
-          `${f.fields.startupName}: ${form.startupName}`,
-          `${f.fields.ideaDesc}: ${form.ideaDesc}`,
-          `${f.fields.problemSolved}: ${form.problemSolved}`,
-          `${f.fields.targetAudience}: ${form.targetAudience}`,
-          ``,
-          `=== ${f.sectionC} ===`,
-          `${f.fields.techType}: ${form.techType}`,
-          ``,
-          `=== ${f.sectionD} ===`,
-          `${f.fields.hasPrototype}: ${form.hasPrototype}`,
-          `${f.fields.projectStage}: ${form.projectStage}`,
-          `${f.fields.budget}: ${form.budget}`,
-          `${f.fields.timeline}: ${form.timeline}`,
-          ``,
-          `=== ${f.sectionE} ===`,
-          `${f.fields.notes}: ${form.notes}`,
-        ].join("\n")
-      : [
-          `=== ${f.sectionA} ===`,
-          `${f.fields.fullName}: ${form.fullName}`,
-          `${f.fields.email}: ${form.email}`,
-          `${f.fields.mobile}: ${form.mobile}`,
-          `${f.fields.company}: ${form.company}`,
-          ``,
-          `=== ${f.sectionB} ===`,
-          `${f.fields.ideaName}: ${form.ideaName}`,
-          `${f.fields.startupName}: ${form.startupName}`,
-          `${f.fields.ideaDesc}: ${form.ideaDesc}`,
-          `${f.fields.problemSolved}: ${form.problemSolved}`,
-          `${f.fields.targetAudience}: ${form.targetAudience}`,
-          ``,
-          `=== ${f.sectionC} ===`,
-          `${f.fields.techType}: ${form.techType}`,
-          ``,
-          `=== ${f.sectionD} ===`,
-          `${f.fields.hasPrototype}: ${form.hasPrototype}`,
-          `${f.fields.projectStage}: ${form.projectStage}`,
-          `${f.fields.budget}: ${form.budget}`,
-          `${f.fields.timeline}: ${form.timeline}`,
-          ``,
-          `=== ${f.sectionE} ===`,
-          `${f.fields.notes}: ${form.notes}`,
-        ].join("\n");
-    window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
+    setStatus("loading");
+
+    const subject = f.emailSubject;
+    const items = [
+      `=== ${f.sectionA} ===`,
+      `${f.fields.fullName}: ${form.fullName}`,
+      `${f.fields.email}: ${form.email}`,
+      `${f.fields.mobile}: ${form.mobile}`,
+      `${f.fields.company}: ${form.company}`,
+      ``,
+      `=== ${f.sectionB} ===`,
+      `${f.fields.ideaName}: ${form.ideaName}`,
+      `${f.fields.startupName}: ${form.startupName}`,
+      `${f.fields.ideaDesc}: ${form.ideaDesc}`,
+      `${f.fields.problemSolved}: ${form.problemSolved}`,
+      `${f.fields.targetAudience}: ${form.targetAudience}`,
+      ``,
+      `=== ${f.sectionC} ===`,
+      `${f.fields.techType}: ${form.techType}`,
+      ``,
+      `=== ${f.sectionD} ===`,
+      `${f.fields.hasPrototype}: ${form.hasPrototype}`,
+      `${f.fields.projectStage}: ${form.projectStage}`,
+      `${f.fields.budget}: ${form.budget}`,
+      `${f.fields.timeline}: ${form.timeline}`,
+      ``,
+      `=== ${f.sectionE} ===`,
+      `${f.fields.notes}: ${form.notes}`,
+    ];
+
+    const { ok } = await sendEmail({
+      subject,
+      message: items.join("\n"),
+      from_name: form.fullName,
+      reply_to: form.email,
+    });
+
+    if (ok) {
+      setStatus("success");
+      setForm({
+        fullName: "", email: "", mobile: "", company: "",
+        ideaName: "", startupName: "", ideaDesc: "", problemSolved: "", targetAudience: "",
+        techType: "", hasPrototype: "", projectStage: "", budget: "", timeline: "", notes: "",
+      });
+      setTimeout(() => setStatus("idle"), 5000);
+    } else {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   const focusStyle = { borderColor: "var(--primary)", boxShadow: "0 0 0 3px rgba(0,168,200,0.12)" };
@@ -295,14 +291,33 @@ export default function SubmitIdea() {
 
             {/* Submit */}
             <button type="submit"
-              className="w-full flex items-center justify-center gap-2 px-8 py-4 text-white font-bold text-base rounded-xl transition-all duration-200 hover:-translate-y-0.5"
-              style={{ backgroundColor: "var(--primary)", boxShadow: "0 4px 24px rgba(0,168,200,0.30)" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              {f.submit}
+              disabled={status === "loading"}
+              className="w-full flex items-center justify-center gap-2 px-8 py-4 text-white font-bold text-base rounded-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed"
+              style={{ 
+                backgroundColor: status === "success" ? "#10b981" : status === "error" ? "#ef4444" : "var(--primary)", 
+                boxShadow: "0 4px 24px rgba(0,168,200,0.30)" 
+              }}
+              onMouseEnter={e => { if (status === "idle") (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-dark)"; }}
+              onMouseLeave={e => { if (status === "idle") (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}>
+              {status === "loading" ? (
+                <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : status === "success" ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              ) : status === "error" ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              )}
+              {status === "loading" ? (lang === "ar" ? "جاري الإرسال..." : "Sending...") : 
+               status === "success" ? (lang === "ar" ? "تم الإرسال بنجاح!" : "Sent Successfully!") :
+               status === "error" ? (lang === "ar" ? "فشل الإرسال، حاول لاحقاً" : "Failed to send, try again") :
+               f.submit}
             </button>
           </form>
         </div>
